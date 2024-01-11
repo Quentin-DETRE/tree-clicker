@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: 2099863507407804413}
   - component: {fileID: 8614701406454076306}
   m_Layer: 0
-  m_Name: PlanetMesh
+  m_Name: Planet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -120,12 +120,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3868543672574992676}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7079147, y: 0, z: 0, w: 0.706298}
+  m_LocalRotation: {x: -0.7079147, y: -0, z: -0, w: 0.706298}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 100, y: 100.00003, z: 100.00006}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6787594385453260574}
+  m_Father: {fileID: 1777888766830191973}
   m_LocalEulerAnglesHint: {x: -90.131, y: 0, z: 0}
 --- !u!33 &2099863507407804413
 MeshFilter:
@@ -191,7 +191,7 @@ GameObject:
   - component: {fileID: 1777888766830191973}
   - component: {fileID: 617509154094504295}
   m_Layer: 0
-  m_Name: RotateCam
+  m_Name: RotatePlanet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -210,7 +210,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6768704884562967030}
+  - {fileID: 5753188997444605845}
   m_Father: {fileID: 6787594385453260574}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &617509154094504295
@@ -254,10 +254,10 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.17020583, y: -0.36364654, z: 0.06223812, w: 0.91373825}
   m_LocalPosition: {x: 6.2, y: 3.48, z: -6.48}
-  m_LocalScale: {x: 100, y: 100, z: 100.00009}
+  m_LocalScale: {x: 100, y: 100, z: 100.00011}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1777888766830191973}
+  m_Father: {fileID: 6787594385453260574}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &6878649257220336412
 Camera:
@@ -398,7 +398,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5753188997444605845}
+  - {fileID: 6768704884562967030}
   - {fileID: 1777888766830191973}
   - {fileID: 3845160556900112477}
   m_Father: {fileID: 0}

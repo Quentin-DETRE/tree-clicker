@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &1707786127 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3868543672574992676, guid: 29be0b85c6d04c146ad74d3125cb6b62, type: 3}
+  m_PrefabInstance: {fileID: 9039329346541672864}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &9039329346541672864
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -131,6 +136,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2377399570696382896, guid: 29be0b85c6d04c146ad74d3125cb6b62, type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 1707786127}
+    - target: {fileID: 3868543672574992676, guid: 29be0b85c6d04c146ad74d3125cb6b62, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6768704884562967030, guid: 29be0b85c6d04c146ad74d3125cb6b62, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 14.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 6768704884562967030, guid: 29be0b85c6d04c146ad74d3125cb6b62, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 7.83
+      objectReference: {fileID: 0}
+    - target: {fileID: 6768704884562967030, guid: 29be0b85c6d04c146ad74d3125cb6b62, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -14.74
+      objectReference: {fileID: 0}
     - target: {fileID: 6787594385453260574, guid: 29be0b85c6d04c146ad74d3125cb6b62, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -171,9 +196,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7189391291178300460, guid: 29be0b85c6d04c146ad74d3125cb6b62, type: 3}
+      propertyPath: planetRotate.y
+      value: -2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7308673420206541423, guid: 29be0b85c6d04c146ad74d3125cb6b62, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8872659188147108441, guid: 29be0b85c6d04c146ad74d3125cb6b62, type: 3}
       propertyPath: m_Name
       value: ViewWorld
+      objectReference: {fileID: 0}
+    - target: {fileID: 8872659188147108441, guid: 29be0b85c6d04c146ad74d3125cb6b62, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

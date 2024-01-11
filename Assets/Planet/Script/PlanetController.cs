@@ -5,10 +5,6 @@ using UnityEngine;
 public class PlanetController : MonoBehaviour
 {
     public Vector3 planetRotate;
-    void Start()
-    {
-        planetRotate = GetComponent<Vector3>();
-    }
 
     // Update is called once per frame
     void Update()
