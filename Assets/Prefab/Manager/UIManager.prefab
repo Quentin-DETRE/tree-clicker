@@ -45,5 +45,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startUIPrefab: {fileID: 3282852925073209023, guid: 11afdd1518ad37042b239ae203156120, type: 3}
-  gameUIPrefab: {fileID: 6112377940498689292, guid: c094034b784f0604db880abae4973e29, type: 3}
+  gameUIPrefab: {fileID: 4944279766411789471, guid: 94ddf69dcf93ab347be67f52cb2cf176, type: 3}
   pauseUIPrefab: {fileID: 848291235759468850, guid: 82b25987e60035442ad863034f4e05e3, type: 3}
