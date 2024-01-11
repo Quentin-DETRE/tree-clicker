@@ -11,19 +11,61 @@ public class CameraController : MonoBehaviour
 
     float minZoom = 10f;
     float maxZoom = 100f;
-    float sensitivity = 17f;
+    float sensitivity = 15f;
+
+    float angleMarge = 1f;
+    bool canRotateEarth = false;
+
+    bool canRotateX = true;
+    bool canRotateY = true;
+
 
     private void Update()
     {
-        if (Input.GetMouseButton(1))
+        Controls();
+
+        if (Input.GetMouseButton(0))
         {
-            transform.RotateAround(target.transform.position, transform.up, Input.GetAxis("Mouse X") * speed);
-            transform.RotateAround(target.transform.position, transform.right, Input.GetAxis("Mouse Y") * -speed);
+            if(canRotateX)
+                transform.RotateAround(target.transform.position, transform.up, Input.GetAxis("Mouse X") * speed);
+            if(canRotateY)
+                transform.RotateAround(target.transform.position, transform.right, Input.GetAxis("Mouse Y") * -speed);
+        }
+        else
+        {
+            if (transform.eulerAngles.z > angleMarge && transform.eulerAngles.z < 180)
+                transform.RotateAround(target.transform.position, transform.forward, -(speed / 100));
+            else if (transform.eulerAngles.z > 180 && transform.eulerAngles.z < (360 - angleMarge))
+                transform.RotateAround(target.transform.position, transform.forward, (speed / 100));
         }
 
         float zoom = camera.fieldOfView;
         zoom += Input.GetAxis("Mouse ScrollWheel") * -sensitivity;
         zoom = Mathf.Clamp(zoom, minZoom, maxZoom);
         camera.fieldOfView = zoom;
+
+        Debug.Log(Input.GetAxis("Mouse ScrollWheel"));
+    }
+
+    public void Controls()
+    {
+        /// Touche "A" pour activer
+        /// Retourne à la position initial
+        if (Input.GetKeyUp(KeyCode.Q))
+        {
+            camera.fieldOfView = Mathf.Clamp(20f, minZoom, maxZoom);
+            transform.position = new Vector3(0, 0, -15);
+            transform.eulerAngles = new Vector3(0, 0, 0);
+        }
+
+        /// Touche "Q" pour activer
+        /// Active/Désactive la rotation X
+        if (Input.GetKeyUp(KeyCode.A))
+            canRotateX = !canRotateX;
+
+        /// Touche "W" pour activer
+        /// Active/Désactive la rotation Y
+        if (Input.GetKeyUp(KeyCode.Z))
+            canRotateY = !canRotateY;
     }
 }

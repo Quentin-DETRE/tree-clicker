@@ -6,9 +6,18 @@ public class PlanetController : MonoBehaviour
 {
     public Vector3 planetRotate;
 
+    bool rotate = true;
+
     // Update is called once per frame
     void Update()
     {
-        this.gameObject.transform.Rotate(planetRotate * Time.deltaTime);
+        if (rotate)
+        {
+            this.gameObject.transform.Rotate(planetRotate * Time.deltaTime);
+        }
+        if (Input.GetMouseButtonUp(1))
+        {
+            rotate = !rotate;
+        }
     }
 }
