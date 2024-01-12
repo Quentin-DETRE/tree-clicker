@@ -81,4 +81,19 @@ public class UIManager : BaseManager
             pauseUI.SetActive(false);
         }
     }
+
+    public void ResumeGame()
+    {
+        GameManager.Instance.UpdateState(GameState.Playing);
+    }
+    
+    public void StartGame()
+    {
+        GameManager.Instance.UpdateState(GameState.Playing);
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
 }

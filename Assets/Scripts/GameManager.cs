@@ -66,7 +66,7 @@ public class GameManager : BaseManager
         switch (newState)
         {
         case GameState.Start:
-            Time.timeScale = 1;
+            Time.timeScale = 0;
             break;
         case GameState.Playing:
             Time.timeScale = 1;
@@ -90,6 +90,11 @@ public class GameManager : BaseManager
 
         return null;
     }
+
+    public void ChangeGameState(GameState newState)
+    {
+        UpdateState(newState);
+    }    
 }
 
 public enum GameState
