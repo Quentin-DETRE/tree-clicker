@@ -19,4 +19,10 @@ public class OptionsManager : BaseManager
 
     }
 
+    public void SetFullscreen ()
+    {
+        Toggle isFullscreen = gameObject.GetComponent<Toggle>();
+        Screen.fullScreen = isFullscreen.value;
+    }
+
 }
