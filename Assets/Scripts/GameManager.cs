@@ -56,7 +56,7 @@ public class GameManager : BaseManager
 
     void Start()
     {
-        UpdateState(GameState.Start);
+        UpdateState(GameState.Playing);
     }
 
     public void UpdateState(GameState newState)

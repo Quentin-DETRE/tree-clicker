@@ -1,16 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EconomyManager : BaseManager
 {
     public static EconomyManager Instance;
 
-    void Awake() 
+    void Awake()
     {
         if (!CheckSingletonInstance(this, ref Instance))
         {
             return; // Instance already exists, so the new one is destroyed
         }
     }
+
 }
+
