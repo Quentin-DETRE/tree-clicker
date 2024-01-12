@@ -13,7 +13,7 @@ public class PlanetController : MonoBehaviour
     {
         if (rotate)
         {
-            this.gameObject.transform.Rotate(planetRotate * Time.deltaTime);
+            transform.Rotate(planetRotate * Time.deltaTime);
         }
         if (Input.GetMouseButtonUp(1))
         {
