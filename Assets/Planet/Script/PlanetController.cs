@@ -11,11 +11,14 @@ public class PlanetController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (rotate)
+        if (BuildingPlacer.instance._TestBuildIsNull())
         {
-            transform.Rotate(planetRotate * Time.deltaTime);
+            if (rotate)
+            {
+                transform.Rotate(planetRotate * Time.deltaTime);
+            }
         }
-        if (Input.GetMouseButtonUp(1))
+        if (Input.GetKeyDown(KeyCode.Mouse2))
         {
             rotate = !rotate;
         }

@@ -14,7 +14,6 @@ public class CameraController : MonoBehaviour
     float sensitivity = 15f;
 
     float angleMarge = 1f;
-    bool canRotateEarth = false;
 
     bool canRotateX = true;
     bool canRotateY = true;
@@ -23,21 +22,23 @@ public class CameraController : MonoBehaviour
     private void Update()
     {
         Controls();
-
-        if (Input.GetMouseButton(0))
+        if (BuildingPlacer.instance._TestBuildIsNull())
         {
-            if(canRotateX)
-                transform.RotateAround(target.transform.position, transform.up, Input.GetAxis("Mouse X") * speed);
-            if(canRotateY)
-                transform.RotateAround(target.transform.position, transform.right, Input.GetAxis("Mouse Y") * -speed);
-        }
-        else
-        {
-            if (transform.eulerAngles.z > angleMarge && transform.eulerAngles.z < 180)
-                transform.RotateAround(target.transform.position, transform.forward, -(speed / 100));
-            else if (transform.eulerAngles.z > 180 && transform.eulerAngles.z < (360 - angleMarge))
-                transform.RotateAround(target.transform.position, transform.forward, (speed / 100));
-        }
+            if (Input.GetMouseButton(0))
+            {
+                if (canRotateX)
+                    transform.RotateAround(target.transform.position, transform.up, Input.GetAxis("Mouse X") * speed);
+                if (canRotateY)
+                    transform.RotateAround(target.transform.position, transform.right, Input.GetAxis("Mouse Y") * -speed);
+            }
+            else
+            {
+                if (transform.eulerAngles.z > angleMarge && transform.eulerAngles.z < 180)
+                    transform.RotateAround(target.transform.position, transform.forward, -(speed / 100));
+                else if (transform.eulerAngles.z > 180 && transform.eulerAngles.z < (360 - angleMarge))
+                    transform.RotateAround(target.transform.position, transform.forward, (speed / 100));
+            }
+        }        
 
         float zoom = camera.fieldOfView;
         zoom += Input.GetAxis("Mouse ScrollWheel") * -sensitivity;
@@ -54,7 +55,7 @@ public class CameraController : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Q))
         {
             camera.fieldOfView = Mathf.Clamp(20f, minZoom, maxZoom);
-            transform.position = new Vector3(0, 0, -15);
+            transform.position = new Vector3(0, 0, -100f);
             transform.eulerAngles = new Vector3(0, 0, 0);
         }
 
