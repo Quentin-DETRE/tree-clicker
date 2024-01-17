@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : BaseManager
 {
@@ -11,6 +12,7 @@ public class UIManager : BaseManager
     private GameObject startUIPrefab;
     [SerializeField]
     private GameObject gameUIPrefab;
+    private Text seedsText;
     [SerializeField]
     private GameObject pauseUIPrefab;
 
@@ -25,12 +27,14 @@ public class UIManager : BaseManager
     private void Start()
     {
         GameManager.OnStateChanged += HandleStateChange;
+        InventoryManager.OnSeedsChanged += UpdateSeedsDisplay;
         HandleStateChange(GameManager.Instance.State);
     }
 
     private void OnDestroy()
     {
         GameManager.OnStateChanged -= HandleStateChange;
+        InventoryManager.OnSeedsChanged -= UpdateSeedsDisplay;
     }
 
     private void HandleStateChange(GameState newState)
@@ -50,6 +54,15 @@ public class UIManager : BaseManager
         }
     }
 
+    private void UpdateSeedsDisplay(ScientificNumber seedsAmount)
+    {
+        if (seedsText != null)
+        {
+            Debug.Log($"Updating seeds display to {seedsAmount} \n type: {seedsAmount.GetType()} Exponent: {seedsAmount.Exponent} Coefficient: {seedsAmount.Coefficient}");
+            seedsText.text = seedsAmount.ToString();
+        }
+    }
+
     private void LoadUI(GameObject uiPrefab)
     {
         if (currentUI != null)
@@ -60,6 +73,11 @@ public class UIManager : BaseManager
         if (uiPrefab != null)
         {
             currentUI = Instantiate(uiPrefab);
+            if (uiPrefab == gameUIPrefab)
+            {
+                seedsText = currentUI.transform.Find("Shop/Money").GetComponent<Text>();
+                UpdateSeedsDisplay(InventoryManager.Instance.Seeds);
+            }
         }
     }
 
@@ -95,5 +113,15 @@ public class UIManager : BaseManager
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void OnTreeClick()
+    {
+        InventoryManager.Instance.AddSeeds(EconomyManager.Instance.CalculateSeedsPerClick());
+    }
+
+    public void OnClickUpgrade(string upgradeName)
+    {
+        UpgradeManager.Instance.BuyUpgrade(upgradeName);
     }
 }

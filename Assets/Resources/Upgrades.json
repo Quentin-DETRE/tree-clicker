@@ -1,0 +1,61 @@
+{
+    "upgrades": [
+        {
+            "upgradeName": "Tree",
+            "cost": {
+                "Coefficient": 1,
+                "Exponent": 2
+            },
+            "productionPerSecond": {
+                "Coefficient": 5,
+                "Exponent": 0
+            },
+            "requirements": [],
+            "upgradeSteps": [
+                {
+                    "threshold": 10,
+                    "modifier": {
+                        "type": "Production",
+                        "targetUpgradeName": "Tree",
+                        "additiveValue": {
+                            "Coefficient": 2,
+                            "Exponent": 0
+                        },
+                        "multiplicativeValue": 1.1
+                    }
+                }
+            ]
+        },
+        {
+            "upgradeName": "Rain",
+            "cost": {
+                "Coefficient": 1,
+                "Exponent": 3
+            },
+            "productionPerSecond": {
+                "Coefficient": 10,
+                "Exponent": 0
+            },
+            "requirements": [
+                {
+                    "upgradeName": "Tree",
+                    "threshold": 10
+                }
+            ],
+            "upgradeSteps": [
+                {
+                    "threshold": 10,
+                    "modifier": {
+                        "type": "Production",
+                        "targetUpgradeName": "Rain",
+                        "additiveValue": {
+                            "Coefficient": 2,
+                            "Exponent": 0
+                        },
+                        "multiplicativeValue": 1.1
+                    }
+                }
+            ]
+        }
+    ]
+}
