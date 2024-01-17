@@ -91,7 +91,6 @@ GameObject:
   - component: {fileID: 1130997241904193234}
   - component: {fileID: 2580463111453962599}
   - component: {fileID: 3720232692066155573}
-  - component: {fileID: 2295766852650088438}
   m_Layer: 5
   m_Name: ButtonShop
   m_TagString: Untagged
@@ -206,32 +205,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Shop, Assembly-CSharp
-        m_MethodName: onBuyItem
-        m_Mode: 3
+      - m_Target: {fileID: 3444405834482315142, guid: 87f21ac516b24aa4eb2ed7bb3563cac9, type: 3}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: OnClickUpgrade
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &2295766852650088438
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 777323422705247358}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 388d4dbcfd5110648ab0032df5aae966, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemId: 0
-  itemCountUI: {fileID: 317532958887208950}
 --- !u!1 &782843671822523991
 GameObject:
   m_ObjectHideFlags: 0

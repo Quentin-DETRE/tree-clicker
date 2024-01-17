@@ -45,6 +45,10 @@ public class UIManager : BaseManager
         switch (newState)
         {
             case GameState.Start:
+                if (pauseUI != null)
+                {
+                    Destroy(pauseUI);
+                }
                 LoadUI(startUIPrefab);
                 break;
             case GameState.Playing:
@@ -75,9 +79,9 @@ public class UIManager : BaseManager
 
         if (uiPrefab != null)
         {
-            currentUI = Instantiate(uiPrefab);
             if (uiPrefab == startUIPrefab)
             {
+                currentUI = Instantiate(uiPrefab);
                 masterSlider = currentUI.transform.Find("SettingPanel/OpaqueBackground/MasterVolume").GetComponent<Slider>();
                 masterSlider.value = OptionsManager.Instance.masterSliderValue;
                 musiqueSlider = currentUI.transform.Find("SettingPanel/OpaqueBackground/MusicVolume").GetComponent<Slider>();
@@ -87,11 +91,13 @@ public class UIManager : BaseManager
             }
             else if (uiPrefab == gameUIPrefab)
             {
-                seedsText = currentUI.transform.Find("Shop/Money").GetComponent<Text>();
+                currentUI = Instantiate(uiPrefab);
+                seedsText = currentUI.transform.Find("Shop/Money/Counter").GetComponent<Text>();
                 UpdateSeedsDisplay(InventoryManager.Instance.Seeds);
             }
             else if (uiPrefab == pauseUIPrefab)
             {
+                pauseUI = Instantiate(uiPrefab);
                 masterSlider = currentUI.transform.Find("OpaqueBackground/MasterVolume").GetComponent<Slider>();
                 masterSlider.value = OptionsManager.Instance.masterSliderValue;
                 musiqueSlider = currentUI.transform.Find("OpaqueBackground/MusicVolume").GetComponent<Slider>();

@@ -22,7 +22,7 @@ public class CameraController : MonoBehaviour
     private void Update()
     {
         Controls();
-        if (BuildingPlacer.instance._TestBuildIsNull())
+        if (WorldManager.Instance._TestBuildIsNull())
         {
             if (Input.GetMouseButton(0))
             {
@@ -51,7 +51,7 @@ public class CameraController : MonoBehaviour
     public void Controls()
     {
         /// Touche "A" pour activer
-        /// Retourne à la position initial
+        /// Retourne ï¿½ la position initial
         if (Input.GetKeyUp(KeyCode.Q))
         {
             camera.fieldOfView = Mathf.Clamp(20f, minZoom, maxZoom);
@@ -60,12 +60,12 @@ public class CameraController : MonoBehaviour
         }
 
         /// Touche "Q" pour activer
-        /// Active/Désactive la rotation X
+        /// Active/Dï¿½sactive la rotation X
         if (Input.GetKeyUp(KeyCode.A))
             canRotateX = !canRotateX;
 
         /// Touche "W" pour activer
-        /// Active/Désactive la rotation Y
+        /// Active/Dï¿½sactive la rotation Y
         if (Input.GetKeyUp(KeyCode.Z))
             canRotateY = !canRotateY;
     }

@@ -20,9 +20,9 @@ public class EconomyManager : BaseManager
         }
     }
 
-    void Start()
+    void FixedUpdate()
     {
-        StartCoroutine(SeedAccumulationCoroutine());
+        InventoryManager.Instance.AddSeeds(SeedsPerSecond * Time.fixedDeltaTime);
     }
 
     public ScientificNumber CalculateSeedsPerClick()
@@ -113,13 +113,4 @@ public class EconomyManager : BaseManager
         }
         Debug.Log("Seeds per second: " + SeedsPerSecond);
     }
-
-    private IEnumerator SeedAccumulationCoroutine()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(1); // Attendre une seconde
-            InventoryManager.Instance.AddSeeds(SeedsPerSecond); // Ajouter les graines par seconde au solde du joueur
-        }
-}
 }

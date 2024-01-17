@@ -3,9 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class BuildingPlacer : MonoBehaviour
+public class WorldManager : BaseManager
 {
-    public static BuildingPlacer instance; // (Singleton pattern)
+    public static WorldManager Instance;
+
+    public GameObject EnvironmentPrefab;
+
+    public GameObject Environment { get; private set; }
 
     public LayerMask groundLayerMask;
     public Camera _mainCamera;
@@ -19,8 +23,21 @@ public class BuildingPlacer : MonoBehaviour
 
     private void Awake()
     {
-        instance = this; // (Singleton pattern)
+        if (!CheckSingletonInstance(this, ref Instance))
+        {
+            return; // Instance already exists, so the new one is destroyed
+        }
         _buildingPrefab = null;
+    }
+
+    private void Start()
+    {
+        GameManager.OnStateChanged += HandleStateChange;
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.OnStateChanged -= HandleStateChange;
     }
 
     private void Update()
@@ -68,6 +85,35 @@ public class BuildingPlacer : MonoBehaviour
             else if (_toBuild.activeSelf) _toBuild.SetActive(false);
         }
     }
+
+    private void HandleStateChange(GameState state)
+    {
+        // start switch
+        switch (state)
+        {
+            case GameState.Playing:
+                InitializeEnvironment();
+                break;
+            case GameState.Start:
+                if (Environment != null)
+                    Destroy(Environment);
+                break;
+            default:
+                break;
+        }        
+    }
+
+    public void InitializeEnvironment()
+    {
+        if (Environment == null)
+        {
+            Environment = Instantiate(EnvironmentPrefab, _parent);
+        }
+        _mainCamera = Environment.transform.Find("Camera").GetComponent<Camera>();
+        _parent = Environment.transform.Find("Planets/RotatePlanet").transform;
+
+    }
+
 
     public void SetBuildingPrefab(GameObject prefab)
     {

@@ -2,20 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlanetController : MonoBehaviour
+public class AutoRotation : MonoBehaviour
 {
-    public Vector3 planetRotate;
+    public Vector3 RotationPoint;
 
     bool rotate = true;
 
-    // Update is called once per frame
     void Update()
     {
-        if (BuildingPlacer.instance._TestBuildIsNull())
+        if (WorldManager.Instance._TestBuildIsNull())
         {
             if (rotate)
             {
-                transform.Rotate(planetRotate * Time.deltaTime);
+                transform.Rotate(RotationPoint * Time.deltaTime);
             }
         }
         if (Input.GetKeyDown(KeyCode.Mouse2))
