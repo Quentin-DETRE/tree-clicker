@@ -97,6 +97,7 @@ public class GameManager : BaseManager
     }    
 }
 
+[Serializable]
 public enum GameState
 {
     Start,
