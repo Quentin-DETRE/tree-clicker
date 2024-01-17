@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class BuildingPlacer : BaseManager
+public class BuildingPlacer : MonoBehaviour
 {
-    public static BuildingPlacer Instance; // (Singleton pattern)
+    public static BuildingPlacer instance; // (Singleton pattern)
 
     public LayerMask groundLayerMask;
     public Camera _mainCamera;
@@ -19,10 +19,7 @@ public class BuildingPlacer : BaseManager
 
     private void Awake()
     {
-        if (!CheckSingletonInstance(this, ref Instance))
-        {
-            return; // Instance already exists, so the new one is destroyed
-        }
+        instance = this; // (Singleton pattern)
         _buildingPrefab = null;
     }
 
