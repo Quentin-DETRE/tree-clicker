@@ -56,7 +56,7 @@ public class GameManager : BaseManager
 
     void Start()
     {
-        UpdateState(GameState.Start);
+        UpdateState(GameState.Playing);
     }
 
     public void UpdateState(GameState newState)
@@ -97,7 +97,6 @@ public class GameManager : BaseManager
     }    
 }
 
-[Serializable]
 public enum GameState
 {
     Start,
