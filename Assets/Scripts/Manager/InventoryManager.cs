@@ -22,9 +22,9 @@ public class InventoryManager : BaseManager
 
     public void AddSeeds(ScientificNumber amount)
     {
-        Seeds =  Seeds + amount;
+        Seeds += amount;
         // Mettre à jour l'UI ou d'autres systèmes ici
-        maxSeedsPlayerHad = maxSeedsPlayerHad + amount;
+        maxSeedsPlayerHad += amount;
         OnSeedsChanged?.Invoke(Seeds);
     }
 

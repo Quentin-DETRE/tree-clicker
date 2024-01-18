@@ -9,6 +9,8 @@ public class EconomyManager : BaseManager
     public static EconomyManager Instance;
 
     public ScientificNumber SeedsPerSecond { get; private set; } = new ScientificNumber(0);
+    public ScientificNumber SeedsPerClick { get; private set; } = new ScientificNumber(1);
+
 
     private Dictionary<string, List<Modifier>> modifiers = new Dictionary<string, List<Modifier>>();
 
@@ -25,7 +27,7 @@ public class EconomyManager : BaseManager
         InventoryManager.Instance.AddSeeds(SeedsPerSecond * Time.fixedDeltaTime);
     }
 
-    public ScientificNumber CalculateSeedsPerClick()
+    public void UpdateSeedsPerClick()
     {
         ScientificNumber additiveBonus = new ScientificNumber(0);
         double multiplicativeBonus = 1;
@@ -42,7 +44,7 @@ public class EconomyManager : BaseManager
             }
         }
 
-        return (additiveBonus + 1) * multiplicativeBonus;
+        SeedsPerClick = (additiveBonus + 1) * multiplicativeBonus;
     }
 
     public void ApplyModifier(Modifier modifier)
@@ -71,6 +73,10 @@ public class EconomyManager : BaseManager
         if (!modifierExists)
         {
             modifiers[target].Add(modifier);
+        }
+        if (modifier.type == ModifierType.ClickYield)
+        {
+            UpdateSeedsPerClick();
         }
 
         // Mise à jour de la logique économique en fonction des modificateurs
@@ -111,6 +117,5 @@ public class EconomyManager : BaseManager
                 SeedsPerSecond += modifiedProduction;
             }
         }
-        Debug.Log("Seeds per second: " + SeedsPerSecond);
     }
 }

@@ -51,7 +51,6 @@ public class ScientificNumber
     /* ScientificNumber operator */
     public static ScientificNumber operator +(ScientificNumber a, ScientificNumber b)
     {
-        // Gestion des cas où l'un des opérandes est null
         if (a.Exponent > b.Exponent)
         {
             return new ScientificNumber(a.Coefficient + b.Coefficient / Math.Pow(10, a.Exponent - b.Exponent), a.Exponent);
@@ -84,6 +83,27 @@ public class ScientificNumber
         return new ScientificNumber(a.Coefficient / b.Coefficient, a.Exponent - b.Exponent);
     }
 
+    // Opérateurs unaires
+    public static ScientificNumber operator +(ScientificNumber a)
+    {
+        return a;
+    }
+
+    public static ScientificNumber operator -(ScientificNumber a)
+    {
+        return new ScientificNumber(-a.Coefficient, a.Exponent);
+    }
+
+    public static ScientificNumber operator ++(ScientificNumber a)
+    {
+        return new ScientificNumber(a.Coefficient, a.Exponent + 1);
+    }
+
+    public static ScientificNumber operator --(ScientificNumber a)
+    {
+        return new ScientificNumber(a.Coefficient, a.Exponent - 1);
+    }
+
     // Opérateurs de comparaison
     public static bool operator ==(ScientificNumber a, ScientificNumber b)
     {
@@ -107,6 +127,19 @@ public class ScientificNumber
         if (a.Exponent == b.Exponent)
             return a.Coefficient <= b.Coefficient;
         return a.Exponent < b.Exponent;
+    }
+    public static bool operator <(ScientificNumber a, ScientificNumber b)
+    {
+        if (a.Exponent == b.Exponent)
+            return a.Coefficient < b.Coefficient;
+        return a.Exponent < b.Exponent;
+    }
+
+    public static bool operator >(ScientificNumber a, ScientificNumber b)
+    {
+        if (a.Exponent == b.Exponent)
+            return a.Coefficient > b.Coefficient;
+        return a.Exponent > b.Exponent;
     }
 
     /* Double operator */
@@ -147,6 +180,19 @@ public class ScientificNumber
     public static bool operator <=(ScientificNumber a, double b)
     {
         return a <= new ScientificNumber(b);
+    }
+
+    public override bool Equals(object obj)
+    {
+        if (obj is ScientificNumber other)
+        {
+            return Coefficient == other.Coefficient && Exponent == other.Exponent;
+        }
+        return false;
+    }
+    public override int GetHashCode()
+    {
+        return HashCode.Combine(Coefficient, Exponent);
     }
 
     /* Comparison operator */

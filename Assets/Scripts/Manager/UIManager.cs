@@ -98,11 +98,11 @@ public class UIManager : BaseManager
             else if (uiPrefab == pauseUIPrefab)
             {
                 pauseUI = Instantiate(uiPrefab);
-                masterSlider = currentUI.transform.Find("OpaqueBackground/MasterVolume").GetComponent<Slider>();
+                masterSlider = pauseUI.transform.Find("OpaqueBackground/MasterVolume").GetComponent<Slider>();
                 masterSlider.value = OptionsManager.Instance.masterSliderValue;
-                musiqueSlider = currentUI.transform.Find("OpaqueBackground/MusicVolume").GetComponent<Slider>();
+                musiqueSlider = pauseUI.transform.Find("OpaqueBackground/MusicVolume").GetComponent<Slider>();
                 musiqueSlider.value = OptionsManager.Instance.musiqueSliderValue;
-                SFXSlider = currentUI.transform.Find("OpaqueBackground/SFXVolume").GetComponent<Slider>();
+                SFXSlider = pauseUI.transform.Find("OpaqueBackground/SFXVolume").GetComponent<Slider>();
                 SFXSlider.value = OptionsManager.Instance.SFXSliderValue;
 
             }
@@ -155,7 +155,7 @@ public class UIManager : BaseManager
 
     public void OnTreeClick()
     {
-        InventoryManager.Instance.AddSeeds(EconomyManager.Instance.CalculateSeedsPerClick());
+        InventoryManager.Instance.AddSeeds(EconomyManager.Instance.SeedsPerClick);
     }
 
     public void OnClickUpgrade(string upgradeName)

@@ -54,6 +54,11 @@ private void LoadUpgradesFromJSON()
             InventoryManager.Instance.RemoveSeeds(upgrade.cost);
             InventoryManager.Instance.ownedUpgrades[upgradeName]++;
             CheckForUpgradeSteps(upgrade);
+
+            Debug.Log("Upgrade " + upgradeName + " bought!");
+            Debug.Log("Cost: " + upgrade.cost);
+            upgrade.cost = upgrade.cost*1.15;
+            Debug.Log("New cost: " + upgrade.cost);
         }
         EconomyManager.Instance.UpdateSeedsPerSecond();
     }
