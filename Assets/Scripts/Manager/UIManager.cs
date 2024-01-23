@@ -109,6 +109,8 @@ public class UIManager : BaseManager
         }
     }
 
+    // 👉 - UI Management
+
     private void ShowPauseMenu()
     {
         if (pauseUI == null && pauseUIPrefab != null)
@@ -128,17 +130,12 @@ public class UIManager : BaseManager
         }
     }
 
-    public void ResumeGame()
-    {
-        GameManager.Instance.UpdateState(GameState.Playing);
-    }
-    
-    public void StartGame()
+    public void PlayGame()
     {
         GameManager.Instance.UpdateState(GameState.Playing);
     }
 
-    public void MenuGame()
+    public void MainMenuGame()
     {
         GameManager.Instance.UpdateState(GameState.Start);
     }
@@ -152,6 +149,34 @@ public class UIManager : BaseManager
     {
         Application.Quit();
     }
+
+    // 👉 - Options Management
+    public void SetSliderValues(float masterValue, float musicValue, float sfxValue)
+    {
+        if (masterSlider != null)
+            masterSlider.value = masterValue;
+        if (musiqueSlider != null)
+            musiqueSlider.value = musicValue;
+        if (SFXSlider != null)
+            SFXSlider.value = sfxValue;
+    }
+
+    private void HandleMasterVolumeChanged(float value)
+    {
+        OptionsManager.Instance.SetVolume("Master", value);
+    }
+
+    private void HandleMusicVolumeChanged(float value)
+    {
+        OptionsManager.Instance.SetVolume("Musique", value);
+    }
+
+    private void HandleSFXVolumeChanged(float value)
+    {
+        OptionsManager.Instance.SetVolume("SFX", value);
+    } 
+
+    // 👉 - UI Interaction
 
     public void OnTreeClick()
     {
