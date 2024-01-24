@@ -1,5 +1,7 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class UIManager : BaseManager
 {
@@ -20,6 +22,7 @@ public class UIManager : BaseManager
     public Slider musiqueSlider;
     public Slider SFXSlider;
 
+    public GameObject plusOne;
 
     private void Awake()
     {
@@ -188,8 +191,10 @@ public class UIManager : BaseManager
     public void OnTreeClick()
     {
         InventoryManager.Instance.AddSeeds(EconomyManager.Instance.SeedsPerClick);
-        //Debug.Log(currentUI.gameObject.ToString());
-        //currentUI.transform.Find("Arbre").GetComponent<AudioSource>().Play();
+        Debug.Log(Input.mousePosition);
+        
+        GameObject additionCopy = Instantiate(plusOne, new Vector3(Random.Range(-254,254), Random.Range(-504,387), 0), Quaternion.identity) as GameObject;
+        additionCopy.transform.SetParent(GameObject.FindGameObjectWithTag("Tree").transform, false);
     }
 
     public void OnClickUpgrade(string upgradeName)
