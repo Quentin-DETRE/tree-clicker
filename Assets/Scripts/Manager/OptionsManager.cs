@@ -12,9 +12,9 @@ public class OptionsManager : BaseManager
 
     public AudioMixer audioMixer;
 
-    private float masterSliderValue = 0.5f { get; private set;}
-    private float musiqueSliderValue = 0.5f { get; private set;}
-    private float SFXSliderValue = 0.5f { get; private set;}
+    public float masterSliderValue { get; private set;} = 0.5f;
+    public float musiqueSliderValue { get; private set;} = 0.6f;
+    public float SFXSliderValue { get; private set;} = 0.4f;
 
     void Awake() 
     {
@@ -22,7 +22,11 @@ public class OptionsManager : BaseManager
         {
             return; // Instance already exists, so the new one is destroyed
         }
-        LoadSettings()
+    }
+
+    void Start()
+    {
+        LoadSettings();
     }
 
     private void LoadSettings()
@@ -34,6 +38,9 @@ public class OptionsManager : BaseManager
 
         // Utilisez ces valeurs pour initialiser les sliders dans UIManager
         UIManager.Instance.SetSliderValues(masterSliderValue, musiqueSliderValue, SFXSliderValue);
+        audioMixer.SetFloat("Master", Mathf.Log10(masterSliderValue) * 20);
+        audioMixer.SetFloat("Musique", Mathf.Log10(musiqueSliderValue) * 20);
+        audioMixer.SetFloat("SFX", Mathf.Log10(SFXSliderValue) * 20);
     }
 
     public void SetVolume(string parameterName, float sliderValue)
@@ -43,55 +50,22 @@ public class OptionsManager : BaseManager
         
         // Sauvegarder le réglage
         PlayerPrefs.SetFloat(parameterName + "Volume", sliderValue);
+        switch (parameterName)
+        {
+            case "Master":
+                masterSliderValue = sliderValue;
+                break;
+            case "Musique":
+                musiqueSliderValue = sliderValue;
+                break;
+            case "SFX":
+                SFXSliderValue = sliderValue;
+                break;
+        }
     }
 
     public void SetFullscreen(bool isFullscreen)
     {
         Screen.fullScreen = isFullscreen;
-    }
-    public void SetMasterVolume()
-    {
-        float volume = UIManager.Instance.masterSlider.value;
-        masterSliderValue = volume;
-        if (volume > 0)
-        {
-            audioMixer.SetFloat("Master", Mathf.Log10(volume) * 20);
-        }
-        else
-        {
-            audioMixer.SetFloat("Master", -80);
-        }
-    }
-    public void SetMusicVolume()
-    {
-        float volume = UIManager.Instance.musiqueSlider.value;
-        musiqueSliderValue = volume;
-        if (volume > 0)
-        {
-            audioMixer.SetFloat("Musique", Mathf.Log10(volume) * 20);
-        }
-        else
-        {
-            audioMixer.SetFloat("Musique", -80);
-        }
-    }
-    public void SetSFXVolume()
-    {
-        float volume = UIManager.Instance.SFXSlider.value;
-        SFXSliderValue = volume;
-        if (volume > 0)
-        {
-            audioMixer.SetFloat("SFX", Mathf.Log10(volume) * 20);
-        }
-        else
-        {
-            audioMixer.SetFloat("SFX", -80);
-        }
-    }
-
-    public void SetFullscreen ()
-    {
-        Toggle isFullscreen = gameObject.GetComponent<Toggle>();
-        Screen.fullScreen = isFullscreen.value;
     }
 }

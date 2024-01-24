@@ -88,6 +88,9 @@ public class UIManager : BaseManager
                 musiqueSlider.value = OptionsManager.Instance.musiqueSliderValue;
                 SFXSlider = currentUI.transform.Find("SettingPanel/OpaqueBackground/SFXVolume").GetComponent<Slider>();
                 SFXSlider.value = OptionsManager.Instance.SFXSliderValue;
+                masterSlider.onValueChanged.AddListener(HandleMasterVolumeChanged);
+                musiqueSlider.onValueChanged.AddListener(HandleMusicVolumeChanged);
+                SFXSlider.onValueChanged.AddListener(HandleSFXVolumeChanged);
             }
             else if (uiPrefab == gameUIPrefab)
             {
@@ -104,7 +107,9 @@ public class UIManager : BaseManager
                 musiqueSlider.value = OptionsManager.Instance.musiqueSliderValue;
                 SFXSlider = pauseUI.transform.Find("OpaqueBackground/SFXVolume").GetComponent<Slider>();
                 SFXSlider.value = OptionsManager.Instance.SFXSliderValue;
-
+                masterSlider.onValueChanged.AddListener(HandleMasterVolumeChanged);
+                musiqueSlider.onValueChanged.AddListener(HandleMusicVolumeChanged);
+                SFXSlider.onValueChanged.AddListener(HandleSFXVolumeChanged);
             }
         }
     }
