@@ -19,6 +19,8 @@ public class UIManager : BaseManager
     public Slider masterSlider;
     public Slider musiqueSlider;
     public Slider SFXSlider;
+
+
     private void Awake()
     {
         if (!CheckSingletonInstance(this, ref Instance))
@@ -65,7 +67,7 @@ public class UIManager : BaseManager
     {
         if (seedsText != null)
         {
-            Debug.Log($"Updating seeds display to {seedsAmount} \n type: {seedsAmount.GetType()} Exponent: {seedsAmount.Exponent} Coefficient: {seedsAmount.Coefficient}");
+            //Debug.Log($"Updating seeds display to {seedsAmount} \n type: {seedsAmount.GetType()} Exponent: {seedsAmount.Exponent} Coefficient: {seedsAmount.Coefficient}");
             seedsText.text = seedsAmount.ToString();
         }
     }
@@ -186,6 +188,8 @@ public class UIManager : BaseManager
     public void OnTreeClick()
     {
         InventoryManager.Instance.AddSeeds(EconomyManager.Instance.SeedsPerClick);
+        //Debug.Log(currentUI.gameObject.ToString());
+        //currentUI.transform.Find("Arbre").GetComponent<AudioSource>().Play();
     }
 
     public void OnClickUpgrade(string upgradeName)
