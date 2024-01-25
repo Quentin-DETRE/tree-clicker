@@ -53,8 +53,6 @@ public class CameraController : MonoBehaviour
         zoom += Input.GetAxis("Mouse ScrollWheel") * -sensitivity;
         zoom = Mathf.Clamp(zoom, minZoom, maxZoom);
         camera.fieldOfView = zoom;
-
-        //Debug.Log(Input.GetAxis("Mouse ScrollWheel"));
     }
 
     public void Controls()

@@ -6,8 +6,7 @@ public class UpgradeManager : BaseManager
 {
     public static UpgradeManager Instance;
 
-    [SerializeField] 
-    private List<UpgradeObject> availableUpgrades;
+    public List<UpgradeObject> availableUpgrades { get; private set; } = new List<UpgradeObject>();
     void Awake() 
     {
         if (!CheckSingletonInstance(this, ref Instance))
@@ -57,6 +56,7 @@ private void LoadUpgradesFromJSON()
             upgrade.cost = upgrade.cost*1.15;
         }
         EconomyManager.Instance.UpdateSeedsPerSecond();
+        UIManager.Instance.UpdateUpgradeButtonData(upgradeName);
     }
 
     private void CheckForUpgradeSteps(UpgradeObject upgrade)

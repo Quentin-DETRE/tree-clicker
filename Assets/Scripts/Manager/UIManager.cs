@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
+using System.Collections.Generic;
 
 public class UIManager : BaseManager
 {
@@ -17,6 +18,13 @@ public class UIManager : BaseManager
     private Text seedsText;
     [SerializeField]
     private GameObject pauseUIPrefab;
+
+    [SerializeField] 
+    private GameObject upgradeButtonPrefab;
+    [SerializeField] 
+    private Transform upgradeButtonContainer;
+    private Dictionary<string, UpgradeButton> upgradeButtons = new Dictionary<string, UpgradeButton>();
+
 
     public Slider masterSlider;
     public Slider musiqueSlider;
@@ -101,7 +109,10 @@ public class UIManager : BaseManager
             {
                 currentUI = Instantiate(uiPrefab);
                 seedsText = currentUI.transform.Find("Shop/Money/Counter").GetComponent<Text>();
+                Debug.Log(currentUI.transform.Find("Shop/Scroll View/Viewport/Content"));
+                upgradeButtonContainer = currentUI.transform.Find("Shop/Scroll View/Viewport/Content").GetComponent<Transform>();
                 UpdateSeedsDisplay(InventoryManager.Instance.Seeds);
+                CreateUpgradeButtons();
             }
             else if (uiPrefab == pauseUIPrefab)
             {
@@ -116,6 +127,49 @@ public class UIManager : BaseManager
                 musiqueSlider.onValueChanged.AddListener(HandleMusicVolumeChanged);
                 SFXSlider.onValueChanged.AddListener(HandleSFXVolumeChanged);
             }
+        }
+    }
+
+    public void CreateUpgradeButtons()
+    {
+        foreach (var upgrade in UpgradeManager.Instance.availableUpgrades)
+        {
+            GameObject buttonObj = Instantiate(upgradeButtonPrefab, upgradeButtonContainer);
+            UpgradeButton upgradeButton = buttonObj.GetComponent<UpgradeButton>();
+            Sprite upgradeSprite = Resources.Load<Sprite>("Sprites/Upgrades/" + upgrade.spriteName);
+            // Configurez le bouton ici
+            upgradeButton.Initialize(upgrade, upgradeSprite, GetCurrentUpgradeStepDescription(upgrade));
+
+            // Stockez la référence au bouton
+            upgradeButtons.Add(upgrade.upgradeName, upgradeButton);
+        }
+    }
+
+    public string GetCurrentUpgradeStepDescription(UpgradeObject upgrade)
+    {
+        // Trouvez l'étape actuelle et retournez sa description
+        int currentCount = InventoryManager.Instance.GetOwnedUpgradeCount(upgrade.upgradeName);
+        foreach (var step in upgrade.upgradeSteps)
+        {
+            if (currentCount < step.threshold)
+                return step.description;
+        }
+        return ""; // Ou une description par défaut si nécessaire
+    }
+
+    public void UpdateUpgradeButtonData(string upgradeName)
+    {
+        if (upgradeButtons.TryGetValue(upgradeName, out UpgradeButton button))
+        {
+            button.UpdateData();
+        }
+    }
+
+    public void UpdateUpgradeButtonState(string upgradeName, bool isActive)
+    {
+        if (upgradeButtons.TryGetValue(upgradeName, out UpgradeButton button))
+        {
+            button.gameObject.SetActive(isActive);
         }
     }
 

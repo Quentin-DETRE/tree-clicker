@@ -47,7 +47,8 @@ MonoBehaviour:
   startUIPrefab: {fileID: 3282852925073209023, guid: 11afdd1518ad37042b239ae203156120, type: 3}
   gameUIPrefab: {fileID: 4944279766411789471, guid: 94ddf69dcf93ab347be67f52cb2cf176, type: 3}
   pauseUIPrefab: {fileID: 848291235759468850, guid: 82b25987e60035442ad863034f4e05e3, type: 3}
+  upgradeButtonPrefab: {fileID: 777323422705247358, guid: e8d92237bb873bc4abf6c316551e6bfd, type: 3}
+  upgradeButtonContainer: {fileID: 0}
   masterSlider: {fileID: 0}
   musiqueSlider: {fileID: 0}
   SFXSlider: {fileID: 0}
-  plusOne: {fileID: 5953982562486748435, guid: 532f308ba18ba2245b7053e6db5c5d60, type: 3}

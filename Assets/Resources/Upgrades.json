@@ -1,59 +1,321 @@
 {
     "upgrades": [
         {
-            "upgradeName": "Tree",
+            "upgradeName": "Arbre",
+            "spriteName": "tree",
             "cost": {
-                "Coefficient": 1,
-                "Exponent": 2
-            },
-            "productionPerSecond": {
-                "Coefficient": 5,
+                "Coefficient": 10,
                 "Exponent": 0
             },
-            "requirements": [],
+            "productionPerSecond": {
+                "Coefficient": 1,
+                "Exponent": 0
+            },
             "upgradeSteps": [
                 {
                     "threshold": 10,
                     "modifier": {
                         "type": "Production",
-                        "targetUpgradeName": "Tree",
+                        "targetUpgradeName": "Arbre",
                         "additiveValue": {
-                            "Coefficient": 2,
+                            "Coefficient": 1,
                             "Exponent": 0
                         },
-                        "multiplicativeValue": 1.1
-                    }
+                        "multiplicativeValue": 2
+                    },
+                    "description": "10 Arbres: Production x2"
+                },
+                {
+                    "threshold": 25,
+                    "modifier": {
+                        "type": "Production",
+                        "targetUpgradeName": "Arbre",
+                        "additiveValue": {
+                            "Coefficient": 1,
+                            "Exponent": 0
+                        },
+                        "multiplicativeValue": 2
+                    },
+                    "description": "25 Arbres: Production x2"
+                },
+                {
+                    "threshold": 50,
+                    "modifier": {
+                        "type": "Production",
+                        "targetUpgradeName": "Arbre",
+                        "additiveValue": {
+                            "Coefficient": 1,
+                            "Exponent": 0
+                        },
+                        "multiplicativeValue": 2
+                    },
+                    "description": "50 Arbres: Production x2"
                 }
             ]
         },
         {
-            "upgradeName": "Rain",
+            "upgradeName": "Volontaire",
+            "spriteName": "volunteer",
             "cost": {
-                "Coefficient": 1,
-                "Exponent": 3
-            },
-            "productionPerSecond": {
-                "Coefficient": 10,
+                "Coefficient": 50,
                 "Exponent": 0
             },
-            "requirements": [
-                {
-                    "upgradeName": "Tree",
-                    "threshold": 10
-                }
-            ],
+            "productionPerSecond": {
+                "Coefficient": 9,
+                "Exponent": 0
+            },
             "upgradeSteps": [
+                {
+                    "threshold": 5,
+                    "modifier": {
+                        "type": "Production",
+                        "targetUpgradeName": "Volontaire",
+                        "additiveValue": {
+                            "Coefficient": 9,
+                            "Exponent": 0
+                        },
+                        "multiplicativeValue": 2
+                    },
+                    "description": "5 Volontaires: Production x2"
+                },
+                {
+                    "threshold": 15,
+                    "modifier": {
+                        "type": "Production",
+                        "targetUpgradeName": "Volontaire",
+                        "additiveValue": {
+                            "Coefficient": 9,
+                            "Exponent": 0
+                        },
+                        "multiplicativeValue": 2
+                    },
+                    "description": "15 Volontaires: Production x2"
+                },
+                {
+                    "threshold": 30,
+                    "modifier": {
+                        "type": "Production",
+                        "targetUpgradeName": "Volontaire",
+                        "additiveValue": {
+                            "Coefficient": 9,
+                            "Exponent": 0
+                        },
+                        "multiplicativeValue": 2
+                    },
+                    "description": "30 Volontaires: Production x2"
+                }
+            ]
+        },
+        {
+            "upgradeName": "Paysan",
+            "spriteName": "farmer",
+            "cost": {
+                "Coefficient": 300,
+                "Exponent": 0
+            },
+            "productionPerSecond": {
+                "Coefficient": 50,
+                "Exponent": 0
+            },
+            "upgradeSteps": [
+                {
+                    "threshold": 3,
+                    "modifier": {
+                        "type": "Production",
+                        "targetUpgradeName": "Paysan",
+                        "additiveValue": {
+                            "Coefficient": 50,
+                            "Exponent": 0
+                        },
+                        "multiplicativeValue": 2
+                    },
+                    "description": "3 Paysans: Production x2"
+                },
                 {
                     "threshold": 10,
                     "modifier": {
                         "type": "Production",
-                        "targetUpgradeName": "Rain",
+                        "targetUpgradeName": "Paysan",
                         "additiveValue": {
-                            "Coefficient": 2,
+                            "Coefficient": 50,
                             "Exponent": 0
                         },
-                        "multiplicativeValue": 1.1
-                    }
+                        "multiplicativeValue": 2
+                    },
+                    "description": "10 Paysans: Production x2"
+                },
+                {
+                    "threshold": 20,
+                    "modifier": {
+                        "type": "Production",
+                        "targetUpgradeName": "Paysan",
+                        "additiveValue": {
+                            "Coefficient": 50,
+                            "Exponent": 0
+                        },
+                        "multiplicativeValue": 2
+                    },
+                    "description": "20 Paysans: Production x2"
+                }
+            ]
+        },
+        {
+            "upgradeName": "Tracteur",
+            "spriteName": "tractor",
+            "cost": {
+                "Coefficient": 1000,
+                "Exponent": 0
+            },
+            "productionPerSecond": {
+                "Coefficient": 340,
+                "Exponent": 0
+            },
+            "upgradeSteps": [
+                {
+                    "threshold": 5,
+                    "modifier": {
+                        "type": "Production",
+                        "targetUpgradeName": "Tracteur",
+                        "additiveValue": {
+                            "Coefficient": 340,
+                            "Exponent": 0
+                        },
+                        "multiplicativeValue": 2
+                    },
+                    "description": "5 Tracteurs: Production x2"
+                },
+                {
+                    "threshold": 15,
+                    "modifier": {
+                        "type": "Production",
+                        "targetUpgradeName": "Tracteur",
+                        "additiveValue": {
+                            "Coefficient": 340,
+                            "Exponent": 0
+                        },
+                        "multiplicativeValue": 2
+                    },
+                    "description": "15 Tracteurs: Production x2"
+                }
+            ]
+        },
+        {
+            "upgradeName": "Ruche d'abeilles",
+            "spriteName": "beehive",
+            "cost": {
+                "Coefficient": 4000,
+                "Exponent": 0
+            },
+            "productionPerSecond": {
+                "Coefficient": 666,
+                "Exponent": 0
+            },
+            "upgradeSteps": [
+                {
+                    "threshold": 5,
+                    "modifier": {
+                        "type": "Production",
+                        "targetUpgradeName": "Ruche d'abeilles",
+                        "additiveValue": {
+                            "Coefficient": 666,
+                            "Exponent": 0
+                        },
+                        "multiplicativeValue": 2
+                    },
+                    "description": "5 Ruches d'abeilles: Production x2"
+                },
+                {
+                    "threshold": 10,
+                    "modifier": {
+                        "type": "Production",
+                        "targetUpgradeName": "Ruche d'abeilles",
+                        "additiveValue": {
+                            "Coefficient": 666,
+                            "Exponent": 0
+                        },
+                        "multiplicativeValue": 2
+                    },
+                    "description": "10 Ruches d'abeilles: Production x2"
+                }
+            ]
+        },
+        {
+            "upgradeName": "Éolienne",
+            "spriteName": "windmill",
+            "cost": {
+                "Coefficient": 9000,
+                "Exponent": 0
+            },
+            "productionPerSecond": {
+                "Coefficient": 3000,
+                "Exponent": 0
+            },
+            "upgradeSteps": [
+                {
+                    "threshold": 3,
+                    "modifier": {
+                        "type": "Production",
+                        "targetUpgradeName": "Éolienne",
+                        "additiveValue": {
+                            "Coefficient": 3000,
+                            "Exponent": 0
+                        },
+                        "multiplicativeValue": 2
+                    },
+                    "description": "3 Éoliennes: Production x2"
+                },
+                {
+                    "threshold": 7,
+                    "modifier": {
+                        "type": "Production",
+                        "targetUpgradeName": "Éolienne",
+                        "additiveValue": {
+                            "Coefficient": 3000,
+                            "Exponent": 0
+                        },
+                        "multiplicativeValue": 2
+                    },
+                    "description": "7 Éoliennes: Production x2"
+                }
+            ]
+        },
+        {
+            "upgradeName": "Équipe de Jardiniers",
+            "spriteName": "gardeners",
+            "cost": {
+                "Coefficient": 12000,
+                "Exponent": 0
+            },
+            "productionPerSecond": {
+                "Coefficient": 2000,
+                "Exponent": 0
+            },
+            "upgradeSteps": [
+                {
+                    "threshold": 4,
+                    "modifier": {
+                        "type": "Production",
+                        "targetUpgradeName": "Équipe de Jardiniers",
+                        "additiveValue": {
+                            "Coefficient": 2000,
+                            "Exponent": 0
+                        },
+                        "multiplicativeValue": 2
+                    },
+                    "description": "4 Équipes de Jardiniers: Production x2"
+                },
+                {
+                    "threshold": 9,
+                    "modifier": {
+                        "type": "Production",
+                        "targetUpgradeName": "Équipe de Jardiniers",
+                        "additiveValue": {
+                            "Coefficient": 2000,
+                            "Exponent": 0
+                        },
+                        "multiplicativeValue": 2
+                    },
+                    "description": "9 Équipes de Jardiniers: Production x2"
                 }
             ]
         }
