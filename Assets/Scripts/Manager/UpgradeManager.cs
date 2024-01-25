@@ -7,10 +7,6 @@ public class UpgradeManager : BaseManager
     public static UpgradeManager Instance;
 
     public List<UpgradeObject> availableUpgrades { get; private set; } = new List<UpgradeObject>();
-
-    [SerializeField] 
-    private Sprite[] upgradeSprites;
-    private Dictionary<string, Sprite> upgradeSpriteDict = new Dictionary<string, Sprite>();
     void Awake() 
     {
         if (!CheckSingletonInstance(this, ref Instance))
@@ -19,7 +15,6 @@ public class UpgradeManager : BaseManager
         }
         LoadUpgradesFromJSON();
         InitializeUpgrades();
-        InitializeSpriteDictionary();
     }
 
 private void LoadUpgradesFromJSON()
@@ -47,23 +42,6 @@ private void LoadUpgradesFromJSON()
         }
     }
 
-    private void InitializeSpriteDictionary()
-    {
-        foreach (var sprite in upgradeSprites)
-        {
-            upgradeSpriteDict.Add(sprite.name, sprite);
-        }
-    }
-
-    public Sprite GetUpgradeSprite(string upgradeName)
-    {
-        if (upgradeSpriteDict.TryGetValue(upgradeName, out Sprite sprite))
-        {
-            return sprite;
-        }
-        return null; // Ou retourner un sprite par défaut
-    }
-
     public void BuyUpgrade(string upgradeName)
     {
         if (!InventoryManager.Instance.ownedUpgrades.ContainsKey(upgradeName))
@@ -78,6 +56,7 @@ private void LoadUpgradesFromJSON()
             upgrade.cost = upgrade.cost*1.15;
         }
         EconomyManager.Instance.UpdateSeedsPerSecond();
+        UIManager.Instance.UpdateUpgradeButtonData(upgradeName);
     }
 
     private void CheckForUpgradeSteps(UpgradeObject upgrade)

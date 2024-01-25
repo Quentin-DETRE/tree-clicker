@@ -11,6 +11,7 @@ public class UpgradeArray
 public class UpgradeObject
 {
     public string upgradeName;
+    public string spriteName;
     [SerializeField]
     public ScientificNumber cost;
     [SerializeField]
@@ -31,6 +32,8 @@ public struct UpgradeStep
 {
     public int threshold;
     public Modifier modifier;
+
+    public string description;
 }
 
 [System.Serializable]

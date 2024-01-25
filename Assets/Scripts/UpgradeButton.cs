@@ -13,9 +13,11 @@ public class UpgradeButton : MonoBehaviour
     [SerializeField] 
     private Text countText;
     [SerializeField]
+    private Text hintText;
+    [SerializeField]
     private Image upgradeImage;
     private UpgradeObject upgradeData;
-    public void Initialize(UpgradeObject upgrade, Sprite upgradeSprite)
+    public void Initialize(UpgradeObject upgrade, Sprite upgradeSprite, string hint)
     {
         upgradeData = upgrade;
         nameText.text = upgrade.upgradeName;
@@ -23,17 +25,18 @@ public class UpgradeButton : MonoBehaviour
         prodText.text = upgrade.productionPerSecond.ToString();
         countText.text = InventoryManager.Instance.GetOwnedUpgradeCount(upgrade.upgradeName).ToString();
         upgradeImage.sprite = upgradeSprite;
+        hintText.text = hint;
     }
 
     public void UpdateData()
     {
         costText.text = upgradeData.cost.ToString();
         countText.text = InventoryManager.Instance.GetOwnedUpgradeCount(upgradeData.upgradeName).ToString();
+        hintText.text = UIManager.Instance.GetCurrentUpgradeStepDescription(upgradeData);
     }
 
     public void OnClick()
     {
-        Debug.Log("Clicked on " + upgradeData.upgradeName);
         UpgradeManager.Instance.BuyUpgrade(upgradeData.upgradeName);
     }
 }

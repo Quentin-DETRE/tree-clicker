@@ -131,12 +131,32 @@ public class UIManager : BaseManager
         {
             GameObject buttonObj = Instantiate(upgradeButtonPrefab, upgradeButtonContainer);
             UpgradeButton upgradeButton = buttonObj.GetComponent<UpgradeButton>();
-
+            Sprite upgradeSprite = Resources.Load<Sprite>("Sprites/Upgrades/" + upgrade.spriteName);
             // Configurez le bouton ici
-            upgradeButton.Initialize(upgrade, UpgradeManager.Instance.GetUpgradeSprite(upgrade.upgradeName));
+            upgradeButton.Initialize(upgrade, upgradeSprite, GetCurrentUpgradeStepDescription(upgrade));
 
             // Stockez la référence au bouton
             upgradeButtons.Add(upgrade.upgradeName, upgradeButton);
+        }
+    }
+
+    public string GetCurrentUpgradeStepDescription(UpgradeObject upgrade)
+    {
+        // Trouvez l'étape actuelle et retournez sa description
+        int currentCount = InventoryManager.Instance.GetOwnedUpgradeCount(upgrade.upgradeName);
+        foreach (var step in upgrade.upgradeSteps)
+        {
+            if (currentCount < step.threshold)
+                return step.description;
+        }
+        return ""; // Ou une description par défaut si nécessaire
+    }
+
+    public void UpdateUpgradeButtonData(string upgradeName)
+    {
+        if (upgradeButtons.TryGetValue(upgradeName, out UpgradeButton button))
+        {
+            button.UpdateData();
         }
     }
 
