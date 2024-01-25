@@ -18,21 +18,30 @@ public class CameraController : MonoBehaviour
     bool canRotateX = true;
     bool canRotateY = true;
 
+    protected Ray _ray;
+    protected RaycastHit _hit;
+    public LayerMask groundLayerMask;
+
 
     private void Update()
     {
         Controls();
-        if (WorldManager.Instance._TestBuildIsNull())
+        if (WorldManager.Instance._TestBuildIsNull() && (GameManager.Instance.State != GameState.Pause))
         {
-            if (Input.GetMouseButton(0))
+            _ray = camera.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(_ray, out _hit, 1000f, groundLayerMask))
             {
-                if (canRotateX)
-                    transform.RotateAround(target.transform.position, transform.up, Input.GetAxis("Mouse X") * speed);
-                if (canRotateY)
-                    transform.RotateAround(target.transform.position, transform.right, Input.GetAxis("Mouse Y") * -speed);
-            }
+                if (Input.GetMouseButton(0))
+                {
+                    if (canRotateX)
+                        transform.RotateAround(target.transform.position, transform.up, Input.GetAxis("Mouse X") * speed);
+                    if (canRotateY)
+                        transform.RotateAround(target.transform.position, transform.right, Input.GetAxis("Mouse Y") * -speed);
+                }
+            }            
             else
             {
+                StartCoroutine(WaitOneSecond());
                 if (transform.eulerAngles.z > angleMarge && transform.eulerAngles.z < 180)
                     transform.RotateAround(target.transform.position, transform.forward, -(speed / 100));
                 else if (transform.eulerAngles.z > 180 && transform.eulerAngles.z < (360 - angleMarge))
@@ -68,5 +77,10 @@ public class CameraController : MonoBehaviour
         /// Active/D�sactive la rotation Y
         if (Input.GetKeyUp(KeyCode.Z))
             canRotateY = !canRotateY;
+    }
+
+    public IEnumerator WaitOneSecond()
+    {
+        yield return new WaitForSeconds(1.0f);
     }
 }
