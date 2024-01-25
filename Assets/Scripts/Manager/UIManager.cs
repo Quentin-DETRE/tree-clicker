@@ -132,6 +132,7 @@ public class UIManager : BaseManager
 
     public void CreateUpgradeButtons()
     {
+        upgradeButtons.Clear();
         foreach (var upgrade in UpgradeManager.Instance.availableUpgrades)
         {
             GameObject buttonObj = Instantiate(upgradeButtonPrefab, upgradeButtonContainer);

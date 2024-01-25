@@ -54,9 +54,9 @@ private void LoadUpgradesFromJSON()
             InventoryManager.Instance.ownedUpgrades[upgradeName]++;
             CheckForUpgradeSteps(upgrade);
             upgrade.cost = upgrade.cost*1.15;
+            EconomyManager.Instance.UpdateSeedsPerSecond();
+            UIManager.Instance.UpdateUpgradeButtonData(upgradeName);
         }
-        EconomyManager.Instance.UpdateSeedsPerSecond();
-        UIManager.Instance.UpdateUpgradeButtonData(upgradeName);
     }
 
     private void CheckForUpgradeSteps(UpgradeObject upgrade)

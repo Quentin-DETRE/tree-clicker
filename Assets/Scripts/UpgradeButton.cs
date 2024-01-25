@@ -30,6 +30,9 @@ public class UpgradeButton : MonoBehaviour
 
     public void UpdateData()
     {
+        Debug.Log("UpdateData");
+        Debug.Log(upgradeData.upgradeName);
+        Debug.Log(InventoryManager.Instance.GetOwnedUpgradeCount(upgradeData.upgradeName));
         costText.text = upgradeData.cost.ToString();
         countText.text = InventoryManager.Instance.GetOwnedUpgradeCount(upgradeData.upgradeName).ToString();
         hintText.text = UIManager.Instance.GetCurrentUpgradeStepDescription(upgradeData);

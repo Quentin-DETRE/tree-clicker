@@ -4,8 +4,8 @@
             "upgradeName": "Arbre",
             "spriteName": "tree",
             "cost": {
-                "Coefficient": 10,
-                "Exponent": 0
+                "Coefficient": 1,
+                "Exponent": 1
             },
             "productionPerSecond": {
                 "Coefficient": 1,
@@ -57,8 +57,8 @@
             "upgradeName": "Volontaire",
             "spriteName": "volunteer",
             "cost": {
-                "Coefficient": 50,
-                "Exponent": 0
+                "Coefficient": 5,
+                "Exponent": 1
             },
             "productionPerSecond": {
                 "Coefficient": 9,
@@ -110,12 +110,12 @@
             "upgradeName": "Paysan",
             "spriteName": "farmer",
             "cost": {
-                "Coefficient": 300,
-                "Exponent": 0
+                "Coefficient": 3,
+                "Exponent": 2
             },
             "productionPerSecond": {
-                "Coefficient": 50,
-                "Exponent": 0
+                "Coefficient": 5,
+                "Exponent": 1
             },
             "upgradeSteps": [
                 {
@@ -124,8 +124,8 @@
                         "type": "Production",
                         "targetUpgradeName": "Paysan",
                         "additiveValue": {
-                            "Coefficient": 50,
-                            "Exponent": 0
+                            "Coefficient": 5,
+                            "Exponent": 1
                         },
                         "multiplicativeValue": 2
                     },
@@ -137,8 +137,8 @@
                         "type": "Production",
                         "targetUpgradeName": "Paysan",
                         "additiveValue": {
-                            "Coefficient": 50,
-                            "Exponent": 0
+                            "Coefficient": 5,
+                            "Exponent": 1
                         },
                         "multiplicativeValue": 2
                     },
@@ -150,8 +150,8 @@
                         "type": "Production",
                         "targetUpgradeName": "Paysan",
                         "additiveValue": {
-                            "Coefficient": 50,
-                            "Exponent": 0
+                            "Coefficient": 5,
+                            "Exponent": 1
                         },
                         "multiplicativeValue": 2
                     },
@@ -163,12 +163,12 @@
             "upgradeName": "Tracteur",
             "spriteName": "tractor",
             "cost": {
-                "Coefficient": 1000,
-                "Exponent": 0
+                "Coefficient": 1,
+                "Exponent": 3
             },
             "productionPerSecond": {
-                "Coefficient": 340,
-                "Exponent": 0
+                "Coefficient": 3.4,
+                "Exponent": 2
             },
             "upgradeSteps": [
                 {
@@ -177,8 +177,8 @@
                         "type": "Production",
                         "targetUpgradeName": "Tracteur",
                         "additiveValue": {
-                            "Coefficient": 340,
-                            "Exponent": 0
+                            "Coefficient": 3.4,
+                            "Exponent": 2
                         },
                         "multiplicativeValue": 2
                     },
@@ -190,8 +190,8 @@
                         "type": "Production",
                         "targetUpgradeName": "Tracteur",
                         "additiveValue": {
-                            "Coefficient": 340,
-                            "Exponent": 0
+                            "Coefficient": 3.4,
+                            "Exponent": 2
                         },
                         "multiplicativeValue": 2
                     },
@@ -203,12 +203,12 @@
             "upgradeName": "Ruche d'abeilles",
             "spriteName": "beehive",
             "cost": {
-                "Coefficient": 4000,
-                "Exponent": 0
+                "Coefficient": 4,
+                "Exponent": 3
             },
             "productionPerSecond": {
-                "Coefficient": 666,
-                "Exponent": 0
+                "Coefficient": 6.66,
+                "Exponent": 2
             },
             "upgradeSteps": [
                 {
@@ -217,8 +217,8 @@
                         "type": "Production",
                         "targetUpgradeName": "Ruche d'abeilles",
                         "additiveValue": {
-                            "Coefficient": 666,
-                            "Exponent": 0
+                            "Coefficient": 6.66,
+                            "Exponent": 2
                         },
                         "multiplicativeValue": 2
                     },
@@ -230,8 +230,8 @@
                         "type": "Production",
                         "targetUpgradeName": "Ruche d'abeilles",
                         "additiveValue": {
-                            "Coefficient": 666,
-                            "Exponent": 0
+                            "Coefficient": 6.66,
+                            "Exponent": 2
                         },
                         "multiplicativeValue": 2
                     },
@@ -243,12 +243,12 @@
             "upgradeName": "Éolienne",
             "spriteName": "windmill",
             "cost": {
-                "Coefficient": 9000,
-                "Exponent": 0
+                "Coefficient": 9,
+                "Exponent": 3
             },
             "productionPerSecond": {
-                "Coefficient": 3000,
-                "Exponent": 0
+                "Coefficient": 3,
+                "Exponent": 3
             },
             "upgradeSteps": [
                 {
@@ -257,8 +257,8 @@
                         "type": "Production",
                         "targetUpgradeName": "Éolienne",
                         "additiveValue": {
-                            "Coefficient": 3000,
-                            "Exponent": 0
+                            "Coefficient": 3,
+                            "Exponent": 3
                         },
                         "multiplicativeValue": 2
                     },
@@ -270,8 +270,8 @@
                         "type": "Production",
                         "targetUpgradeName": "Éolienne",
                         "additiveValue": {
-                            "Coefficient": 3000,
-                            "Exponent": 0
+                            "Coefficient": 3,
+                            "Exponent": 3
                         },
                         "multiplicativeValue": 2
                     },
@@ -283,12 +283,12 @@
             "upgradeName": "Équipe de Jardiniers",
             "spriteName": "gardeners",
             "cost": {
-                "Coefficient": 12000,
-                "Exponent": 0
+                "Coefficient": 1.2,
+                "Exponent": 4
             },
             "productionPerSecond": {
-                "Coefficient": 2000,
-                "Exponent": 0
+                "Coefficient": 2,
+                "Exponent": 3
             },
             "upgradeSteps": [
                 {
@@ -297,8 +297,8 @@
                         "type": "Production",
                         "targetUpgradeName": "Équipe de Jardiniers",
                         "additiveValue": {
-                            "Coefficient": 2000,
-                            "Exponent": 0
+                            "Coefficient": 2,
+                            "Exponent": 3
                         },
                         "multiplicativeValue": 2
                     },
@@ -310,8 +310,8 @@
                         "type": "Production",
                         "targetUpgradeName": "Équipe de Jardiniers",
                         "additiveValue": {
-                            "Coefficient": 2000,
-                            "Exponent": 0
+                            "Coefficient": 2,
+                            "Exponent": 3
                         },
                         "multiplicativeValue": 2
                     },
