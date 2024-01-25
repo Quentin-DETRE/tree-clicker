@@ -190,9 +190,7 @@ public class UIManager : BaseManager
 
     public void OnTreeClick()
     {
-        InventoryManager.Instance.AddSeeds(EconomyManager.Instance.SeedsPerClick);
-        Debug.Log(Input.mousePosition);
-        
+        InventoryManager.Instance.AddSeeds(EconomyManager.Instance.SeedsPerClick);       
         GameObject additionCopy = Instantiate(plusOne, new Vector3(Random.Range(-254,254), Random.Range(-504,387), 0), Quaternion.identity) as GameObject;
         additionCopy.transform.SetParent(GameObject.FindGameObjectWithTag("Tree").transform, false);
     }
