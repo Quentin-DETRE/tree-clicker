@@ -99,6 +99,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   camera: {fileID: 5921848536256919970}
   target: {fileID: 7936397492923511802}
+  earthLayerMask:
+    serializedVersion: 2
+    m_Bits: 768
 --- !u!81 &8746171440428471708
 AudioListener:
   m_ObjectHideFlags: 0
@@ -480,7 +483,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7527455400304297548, guid: cfc82b35983df694185bf60fa8884790, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7527455400304297548, guid: cfc82b35983df694185bf60fa8884790, type: 3}
       propertyPath: m_IsActive
@@ -488,7 +491,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8268000956750603922, guid: cfc82b35983df694185bf60fa8884790, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8268000956750603922, guid: cfc82b35983df694185bf60fa8884790, type: 3}
       propertyPath: m_IsActive

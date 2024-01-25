@@ -20,7 +20,7 @@ public class CameraController : MonoBehaviour
 
     protected Ray _ray;
     protected RaycastHit _hit;
-    public LayerMask groundLayerMask;
+    public LayerMask earthLayerMask;
 
 
     private void Update()
@@ -28,10 +28,10 @@ public class CameraController : MonoBehaviour
         Controls();
         if (WorldManager.Instance._TestBuildIsNull() && (GameManager.Instance.State != GameState.Pause))
         {
-            _ray = camera.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(_ray, out _hit, 1000f, groundLayerMask))
+            if (Input.GetMouseButton(0))
             {
-                if (Input.GetMouseButton(0))
+                _ray = camera.ScreenPointToRay(Input.mousePosition);
+                if (Physics.Raycast(_ray, out _hit, 1000f, earthLayerMask))
                 {
                     if (canRotateX)
                         transform.RotateAround(target.transform.position, transform.up, Input.GetAxis("Mouse X") * speed);
@@ -47,12 +47,11 @@ public class CameraController : MonoBehaviour
                 else if (transform.eulerAngles.z > 180 && transform.eulerAngles.z < (360 - angleMarge))
                     transform.RotateAround(target.transform.position, transform.forward, (speed / 100));
             }
+            float zoom = camera.fieldOfView;
+            zoom += Input.GetAxis("Mouse ScrollWheel") * -sensitivity;
+            zoom = Mathf.Clamp(zoom, minZoom, maxZoom);
+            camera.fieldOfView = zoom;
         }        
-
-        float zoom = camera.fieldOfView;
-        zoom += Input.GetAxis("Mouse ScrollWheel") * -sensitivity;
-        zoom = Mathf.Clamp(zoom, minZoom, maxZoom);
-        camera.fieldOfView = zoom;
     }
 
     public void Controls()
