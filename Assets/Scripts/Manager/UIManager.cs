@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class UIManager : BaseManager
 {
@@ -15,6 +16,13 @@ public class UIManager : BaseManager
     private Text seedsText;
     [SerializeField]
     private GameObject pauseUIPrefab;
+
+    [SerializeField] 
+    private GameObject upgradeButtonPrefab;
+    [SerializeField] 
+    private Transform upgradeButtonContainer;
+    private Dictionary<string, UpgradeButton> upgradeButtons = new Dictionary<string, UpgradeButton>();
+
 
     public Slider masterSlider;
     public Slider musiqueSlider;
@@ -96,7 +104,10 @@ public class UIManager : BaseManager
             {
                 currentUI = Instantiate(uiPrefab);
                 seedsText = currentUI.transform.Find("Shop/Money/Counter").GetComponent<Text>();
+                Debug.Log(currentUI.transform.Find("Shop/Scroll View/Viewport/Content"));
+                upgradeButtonContainer = currentUI.transform.Find("Shop/Scroll View/Viewport/Content").GetComponent<Transform>();
                 UpdateSeedsDisplay(InventoryManager.Instance.Seeds);
+                CreateUpgradeButtons();
             }
             else if (uiPrefab == pauseUIPrefab)
             {
@@ -111,6 +122,29 @@ public class UIManager : BaseManager
                 musiqueSlider.onValueChanged.AddListener(HandleMusicVolumeChanged);
                 SFXSlider.onValueChanged.AddListener(HandleSFXVolumeChanged);
             }
+        }
+    }
+
+    public void CreateUpgradeButtons()
+    {
+        foreach (var upgrade in UpgradeManager.Instance.availableUpgrades)
+        {
+            GameObject buttonObj = Instantiate(upgradeButtonPrefab, upgradeButtonContainer);
+            UpgradeButton upgradeButton = buttonObj.GetComponent<UpgradeButton>();
+
+            // Configurez le bouton ici
+            upgradeButton.Initialize(upgrade, UpgradeManager.Instance.GetUpgradeSprite(upgrade.upgradeName));
+
+            // Stockez la référence au bouton
+            upgradeButtons.Add(upgrade.upgradeName, upgradeButton);
+        }
+    }
+
+    public void UpdateUpgradeButtonState(string upgradeName, bool isActive)
+    {
+        if (upgradeButtons.TryGetValue(upgradeName, out UpgradeButton button))
+        {
+            button.gameObject.SetActive(isActive);
         }
     }
 

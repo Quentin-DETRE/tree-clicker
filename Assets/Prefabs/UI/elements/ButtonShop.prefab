@@ -91,6 +91,7 @@ GameObject:
   - component: {fileID: 1130997241904193234}
   - component: {fileID: 2580463111453962599}
   - component: {fileID: 3720232692066155573}
+  - component: {fileID: 7838832681574959304}
   m_Layer: 5
   m_Name: ButtonShop
   m_TagString: Untagged
@@ -205,10 +206,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3444405834482315142, guid: 87f21ac516b24aa4eb2ed7bb3563cac9, type: 3}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: OnClickUpgrade
-        m_Mode: 5
+      - m_Target: {fileID: 7838832681574959304}
+        m_TargetAssemblyTypeName: UpgradeButton, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -217,6 +218,23 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &7838832681574959304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 777323422705247358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: deb9e65eaec5bee40845b6210012de72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nameText: {fileID: 9047992675069928251}
+  costText: {fileID: 4032792563639067356}
+  prodText: {fileID: 7522543756784876481}
+  countText: {fileID: 317532958887208950}
+  upgradeImage: {fileID: 4180184665720893355}
 --- !u!1 &782843671822523991
 GameObject:
   m_ObjectHideFlags: 0

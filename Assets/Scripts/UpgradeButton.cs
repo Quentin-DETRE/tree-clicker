@@ -1,27 +1,39 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class UpgradeButton : MonoBehaviour
 {
-    public UpgradeObject upgradeInfo;
-    public Button button;
-    public Text priceText; // Assurez-vous d'avoir une référence au texte du prix
-
-    public void Initialize(UpgradeObject upgrade)
+    [SerializeField] 
+    private TextMeshProUGUI nameText;
+    [SerializeField] 
+    private Text costText;
+    [SerializeField]
+    private Text prodText;
+    [SerializeField] 
+    private Text countText;
+    [SerializeField]
+    private Image upgradeImage;
+    private UpgradeObject upgradeData;
+    public void Initialize(UpgradeObject upgrade, Sprite upgradeSprite)
     {
-        upgradeInfo = upgrade;
-        UpdateButton();
+        upgradeData = upgrade;
+        nameText.text = upgrade.upgradeName;
+        costText.text = upgrade.cost.ToString();
+        prodText.text = upgrade.productionPerSecond.ToString();
+        countText.text = InventoryManager.Instance.GetOwnedUpgradeCount(upgrade.upgradeName).ToString();
+        upgradeImage.sprite = upgradeSprite;
     }
 
-    public void UpdateButton()
+    public void UpdateData()
     {
-        // Mettre à jour le texte, l'image et l'état actif/inactif du bouton
-        priceText.text = upgradeInfo.cost.ToString();
-        // Ici, vous pouvez ajouter d'autres logiques pour gérer l'état du bouton
+        costText.text = upgradeData.cost.ToString();
+        countText.text = InventoryManager.Instance.GetOwnedUpgradeCount(upgradeData.upgradeName).ToString();
     }
 
     public void OnClick()
     {
-        UpgradeManager.Instance.BuyUpgrade(upgradeInfo.upgradeName);
+        Debug.Log("Clicked on " + upgradeData.upgradeName);
+        UpgradeManager.Instance.BuyUpgrade(upgradeData.upgradeName);
     }
 }

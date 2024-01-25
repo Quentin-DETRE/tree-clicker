@@ -6,8 +6,11 @@ public class UpgradeManager : BaseManager
 {
     public static UpgradeManager Instance;
 
+    public List<UpgradeObject> availableUpgrades { get; private set; } = new List<UpgradeObject>();
+
     [SerializeField] 
-    private List<UpgradeObject> availableUpgrades;
+    private Sprite[] upgradeSprites;
+    private Dictionary<string, Sprite> upgradeSpriteDict = new Dictionary<string, Sprite>();
     void Awake() 
     {
         if (!CheckSingletonInstance(this, ref Instance))
@@ -16,6 +19,7 @@ public class UpgradeManager : BaseManager
         }
         LoadUpgradesFromJSON();
         InitializeUpgrades();
+        InitializeSpriteDictionary();
     }
 
 private void LoadUpgradesFromJSON()
@@ -41,6 +45,23 @@ private void LoadUpgradesFromJSON()
         {
             InventoryManager.Instance.ownedUpgrades[upgrade.upgradeName] = 0;
         }
+    }
+
+    private void InitializeSpriteDictionary()
+    {
+        foreach (var sprite in upgradeSprites)
+        {
+            upgradeSpriteDict.Add(sprite.name, sprite);
+        }
+    }
+
+    public Sprite GetUpgradeSprite(string upgradeName)
+    {
+        if (upgradeSpriteDict.TryGetValue(upgradeName, out Sprite sprite))
+        {
+            return sprite;
+        }
+        return null; // Ou retourner un sprite par défaut
     }
 
     public void BuyUpgrade(string upgradeName)
