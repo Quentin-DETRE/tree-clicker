@@ -1,5 +1,7 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class UIManager : BaseManager
 {
@@ -19,6 +21,9 @@ public class UIManager : BaseManager
     public Slider masterSlider;
     public Slider musiqueSlider;
     public Slider SFXSlider;
+
+    public GameObject plusOne;
+
     private void Awake()
     {
         if (!CheckSingletonInstance(this, ref Instance))
@@ -65,7 +70,7 @@ public class UIManager : BaseManager
     {
         if (seedsText != null)
         {
-            Debug.Log($"Updating seeds display to {seedsAmount} \n type: {seedsAmount.GetType()} Exponent: {seedsAmount.Exponent} Coefficient: {seedsAmount.Coefficient}");
+            //Debug.Log($"Updating seeds display to {seedsAmount} \n type: {seedsAmount.GetType()} Exponent: {seedsAmount.Exponent} Coefficient: {seedsAmount.Coefficient}");
             seedsText.text = seedsAmount.ToString();
         }
     }
@@ -185,7 +190,9 @@ public class UIManager : BaseManager
 
     public void OnTreeClick()
     {
-        InventoryManager.Instance.AddSeeds(EconomyManager.Instance.SeedsPerClick);
+        InventoryManager.Instance.AddSeeds(EconomyManager.Instance.SeedsPerClick);       
+        GameObject additionCopy = Instantiate(plusOne, new Vector3(Random.Range(-254,254), Random.Range(-504,387), 0), Quaternion.identity) as GameObject;
+        additionCopy.transform.SetParent(GameObject.FindGameObjectWithTag("Tree").transform, false);
     }
 
     public void OnClickUpgrade(string upgradeName)
