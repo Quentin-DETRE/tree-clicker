@@ -9,6 +9,8 @@ public class CameraController : MonoBehaviour
     public GameObject target;
     float speed = 5.0f;
 
+    Vector3[] camera_transform;
+
     float minZoom = 10f;
     float maxZoom = 100f;
     float sensitivity = 15f;
@@ -21,6 +23,11 @@ public class CameraController : MonoBehaviour
     protected Ray _ray;
     protected RaycastHit _hit;
     public LayerMask earthLayerMask;
+
+    public void Start()
+    {
+        camera_transform = new Vector3[] { transform.position, transform.eulerAngles };
+    }
 
 
     private void Update()
@@ -61,8 +68,8 @@ public class CameraController : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Q))
         {
             camera.fieldOfView = Mathf.Clamp(20f, minZoom, maxZoom);
-            transform.position = new Vector3(0, 0, -100f);
-            transform.eulerAngles = new Vector3(0, 0, 0);
+            transform.position = camera_transform[0];
+            transform.eulerAngles = camera_transform[1];
         }
 
         /// Touche "Q" pour activer
