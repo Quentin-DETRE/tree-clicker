@@ -29,7 +29,6 @@ public class CameraController : MonoBehaviour
         camera_transform = new Vector3[] { transform.position, transform.eulerAngles };
     }
 
-
     private void Update()
     {
         Controls();
@@ -64,7 +63,7 @@ public class CameraController : MonoBehaviour
     public void Controls()
     {
         /// Touche "A" pour activer
-        /// Retourne � la position initial
+        /// Retourne à la position initial
         if (Input.GetKeyUp(KeyCode.Q))
         {
             camera.fieldOfView = Mathf.Clamp(20f, minZoom, maxZoom);
@@ -73,12 +72,12 @@ public class CameraController : MonoBehaviour
         }
 
         /// Touche "Q" pour activer
-        /// Active/D�sactive la rotation X
+        /// Active/Désactive la rotation X
         if (Input.GetKeyUp(KeyCode.A))
             canRotateX = !canRotateX;
 
         /// Touche "W" pour activer
-        /// Active/D�sactive la rotation Y
+        /// Active/Désactive la rotation Y
         if (Input.GetKeyUp(KeyCode.Z))
             canRotateY = !canRotateY;
     }

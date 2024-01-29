@@ -50,3 +50,5 @@ MonoBehaviour:
     m_Bits: 256
   _mainCamera: {fileID: 0}
   _parent: {fileID: 0}
+  _minRadius: 90
+  _maxRadius: 100

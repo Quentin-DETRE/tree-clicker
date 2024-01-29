@@ -8,7 +8,6 @@ public class WorldManager : BaseManager
     public static WorldManager Instance;
 
     public GameObject EnvironmentPrefab;
-
     public GameObject Environment { get; private set; }
 
     public LayerMask groundLayerMask;
@@ -20,6 +19,9 @@ public class WorldManager : BaseManager
 
     protected Ray _ray;
     protected RaycastHit _hit;
+
+    public float _minRadius = 10f;
+    public float _maxRadius = 100f;
 
     private void Awake()
     {
@@ -67,7 +69,7 @@ public class WorldManager : BaseManager
             {
                 if (!_toBuild.activeSelf) _toBuild.SetActive(true);
                 _toBuild.transform.position = _hit.point;
-                _toBuild.transform.rotation = Quaternion.FromToRotation(Vector3.up, _hit.normal) ;
+                _toBuild.transform.rotation = Quaternion.FromToRotation(Vector3.up, _hit.normal);
 
                 if (Input.GetMouseButtonDown(0))
                 { // if left-click
@@ -100,7 +102,7 @@ public class WorldManager : BaseManager
                 break;
             default:
                 break;
-        }        
+        }
     }
 
     public void InitializeEnvironment()
@@ -111,9 +113,40 @@ public class WorldManager : BaseManager
         }
         _mainCamera = Environment.transform.Find("Camera").GetComponent<Camera>();
         _parent = Environment.transform.Find("Planets/RotatePlanet").transform;
-
     }
 
+    public void RandomPlacementButtonClick(GameObject prefab)
+    {
+        SetBuildingPrefab(prefab);
+
+        if (_buildingPrefab != null)
+        {
+            // Générez des coordonnées sphériques aléatoires
+            float randomRadius = Random.Range(_minRadius, _maxRadius);  // Remplacez minRadius et maxRadius par vos valeurs
+            float randomAzimuth = Random.Range(0f, 2f * Mathf.PI);
+            float randomElevation = Random.Range(-Mathf.PI / 2f, Mathf.PI / 2f);
+
+            // Convertir les coordonnées sphériques en position
+            Vector3 randomPosition = new Vector3(
+                randomRadius * Mathf.Sin(randomElevation) * Mathf.Cos(randomAzimuth),
+                randomRadius * Mathf.Sin(randomElevation) * Mathf.Sin(randomAzimuth),
+                randomRadius * Mathf.Cos(randomElevation)
+            );
+
+            // Instancier l'objet et le placer
+            _toBuild = Instantiate(_buildingPrefab, randomPosition, Quaternion.identity, _parent);
+            _toBuild.SetActive(true);
+
+            // Rotation en fonction de la normale de la sphère au point de collision
+            _toBuild.transform.rotation = Quaternion.FromToRotation(Vector3.up, randomPosition.normalized);
+
+            BuildingManager m = _toBuild.GetComponent<BuildingManager>();
+            m.SetPlacementMode(PlacementMode.Fixed);
+
+            _buildingPrefab = null;
+            _toBuild = null;
+        }
+    }
 
     public void SetBuildingPrefab(GameObject prefab)
     {
