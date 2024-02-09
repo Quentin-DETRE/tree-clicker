@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Canvas
   - Tree
+  - Earth
+  - Waypoint
+  - Build
   layers:
   - Default
   - TransparentFX

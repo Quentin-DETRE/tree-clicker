@@ -10,18 +10,11 @@ public class WorldManager : BaseManager
     public GameObject EnvironmentPrefab;
     public GameObject Environment { get; private set; }
 
-    public LayerMask groundLayerMask;
-    public Camera _mainCamera;
-    public Transform _parent;
-
     protected GameObject _buildingPrefab;
     protected GameObject _toBuild;
-
-    protected Ray _ray;
-    protected RaycastHit _hit;
-
-    public float _minRadius = 10f;
-    public float _maxRadius = 100f;
+    protected Transform _parent;
+    public Transform[] _buildWaypointsList;
+    public GameObject[] _prefabUpgrade;
 
     private void Awake()
     {
@@ -45,44 +38,13 @@ public class WorldManager : BaseManager
     private void Update()
     {
         if (_buildingPrefab != null)
-        { // if in build mode
-
-            // right-click: cancel build mode
+        { 
             if (Input.GetMouseButtonDown(1))
             {
                 Destroy(_toBuild);
                 _toBuild = null;
                 _buildingPrefab = null;
                 return;
-            }
-
-            // hide preview when hovering UI
-            if (EventSystem.current.IsPointerOverGameObject())
-            {
-                if (_toBuild.activeSelf) _toBuild.SetActive(false);
-                return;
-            }
-            else if (!_toBuild.activeSelf) _toBuild.SetActive(true);
-
-            _ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(_ray, out _hit, 1000f, groundLayerMask))
-            {
-                if (!_toBuild.activeSelf) _toBuild.SetActive(true);
-                _toBuild.transform.position = _hit.point;
-                _toBuild.transform.rotation = Quaternion.FromToRotation(Vector3.up, _hit.normal);
-
-                if (Input.GetMouseButtonDown(0))
-                { // if left-click
-                    BuildingManager m = _toBuild.GetComponent<BuildingManager>();
-                    if (m.hasValidPlacement)
-                    {
-                        m.SetPlacementMode(PlacementMode.Fixed);
-
-                        _buildingPrefab = null;
-                        _toBuild = null;
-                    }
-                }
-
             }
             else if (_toBuild.activeSelf) _toBuild.SetActive(false);
         }
@@ -109,10 +71,20 @@ public class WorldManager : BaseManager
     {
         if (Environment == null)
         {
-            Environment = Instantiate(EnvironmentPrefab, _parent);
+            Environment = Instantiate(EnvironmentPrefab);
         }
-        _mainCamera = Environment.transform.Find("Camera").GetComponent<Camera>();
-        _parent = Environment.transform.Find("Planets/RotatePlanet").transform;
+
+        Transform[] childTransform = Environment.GetComponentsInChildren<Transform>();
+
+        for (int i = 0; i < childTransform.Length; i++)
+        {
+            if (childTransform[i].CompareTag("Build"))
+            {
+                _parent = childTransform[i];
+                break;
+            }
+        }
+        _buildWaypointsList = _parent.GetComponentsInChildren<Transform>();
     }
 
     public void RandomPlacementButtonClick(GameObject prefab)
@@ -121,24 +93,11 @@ public class WorldManager : BaseManager
 
         if (_buildingPrefab != null)
         {
-            // Générez des coordonnées sphériques aléatoires
-            float randomRadius = Random.Range(_minRadius, _maxRadius);  // Remplacez minRadius et maxRadius par vos valeurs
-            float randomAzimuth = Random.Range(0f, 2f * Mathf.PI);
-            float randomElevation = Random.Range(-Mathf.PI / 2f, Mathf.PI / 2f);
-
-            // Convertir les coordonnées sphériques en position
-            Vector3 randomPosition = new Vector3(
-                randomRadius * Mathf.Sin(randomElevation) * Mathf.Cos(randomAzimuth),
-                randomRadius * Mathf.Sin(randomElevation) * Mathf.Sin(randomAzimuth),
-                randomRadius * Mathf.Cos(randomElevation)
-            );
-
+            int random = Random.Range(0, _buildWaypointsList.Length);
             // Instancier l'objet et le placer
-            _toBuild = Instantiate(_buildingPrefab, randomPosition, Quaternion.identity, _parent);
+            _toBuild = Instantiate(_buildingPrefab, _buildWaypointsList[random].position, _buildWaypointsList[random].rotation, _parent);
             _toBuild.SetActive(true);
 
-            // Rotation en fonction de la normale de la sphère au point de collision
-            _toBuild.transform.rotation = Quaternion.FromToRotation(Vector3.up, randomPosition.normalized);
 
             BuildingManager m = _toBuild.GetComponent<BuildingManager>();
             m.SetPlacementMode(PlacementMode.Fixed);

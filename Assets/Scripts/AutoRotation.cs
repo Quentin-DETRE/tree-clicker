@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class AutoRotation : MonoBehaviour
 {
-    public Vector3 RotationPoint;
+    private Vector3 RotationPoint;
 
-    bool rotate = true;
+    private bool rotate = true;
 
-    void Update()
+    private void Start()
+    {
+        RotationPoint = new Vector3(0.0f, 7.5f, 0.0f);
+    }
+
+    private void Update()
     {
         if (WorldManager.Instance._TestBuildIsNull())
         {

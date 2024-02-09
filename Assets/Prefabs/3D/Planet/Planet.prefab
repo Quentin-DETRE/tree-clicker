@@ -99,9 +99,9 @@ GameObject:
   - component: {fileID: 5254305261962306677}
   - component: {fileID: 4549386959336125646}
   - component: {fileID: 7578428186908648468}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Earth
-  m_TagString: Untagged
+  m_TagString: Earth
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

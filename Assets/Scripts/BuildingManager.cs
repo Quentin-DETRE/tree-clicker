@@ -35,9 +35,6 @@ public class BuildingManager : MonoBehaviour
     {
         if (isFixed) return;
 
-        // ignore ground objects
-        if (_IsGround(other.gameObject)) return;
-
         _nObstacles++;
         SetPlacementMode(PlacementMode.Invalid);
     }
@@ -45,9 +42,6 @@ public class BuildingManager : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         if (isFixed) return;
-
-        // ignore ground objects
-        if (_IsGround(other.gameObject)) return;
 
         _nObstacles--;
         if (_nObstacles == 0)
@@ -117,11 +111,6 @@ public class BuildingManager : MonoBehaviour
         {
             initialMaterials[r] = new List<Material>(r.sharedMaterials);
         }
-    }
-
-    private bool _IsGround(GameObject o)
-    {
-        return ((1 << o.layer) & WorldManager.Instance.groundLayerMask.value) != 0;
     }
 
 }
