@@ -24,6 +24,7 @@ public class CameraController : MonoBehaviour
     protected RaycastHit _hit;
     public LayerMask earthLayerMask;
 
+
     public void Start()
     {
         camera_transform = new Vector3[] { transform.position, transform.eulerAngles };
