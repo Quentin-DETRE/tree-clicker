@@ -2,24 +2,13 @@
 // www.alanzucconi.com
 using UnityEngine;
 
-public enum ColorBlindMode
-{
-    Normal = 0,
-    Protanopia = 1,
-    Protanomaly = 2,
-    Deuteranopia = 3,
-    Deuteranomaly = 4,
-    Tritanopia = 5,
-    Tritanomaly = 6,
-    Achromatopsia = 7,
-    Achromatomaly = 8,
-}
+
 
 [ExecuteInEditMode]
 public class ColorBlindFilter : MonoBehaviour
 {
-    public ColorBlindMode mode = ColorBlindMode.Normal;
-    private ColorBlindMode previousMode = ColorBlindMode.Normal;
+
+    private OptionsManager.ColorBlindMode previousMode = OptionsManager.ColorBlindMode.Normal;
 
     public bool showDifference = false;
 
@@ -49,19 +38,21 @@ public class ColorBlindFilter : MonoBehaviour
     void OnRenderImage(RenderTexture source, RenderTexture destination)
     {
         // No effect
-        if (mode == ColorBlindMode.Normal)
+        OptionsManager.ColorBlindMode mode = OptionsManager.Instance.mode;
+
+        if (mode == OptionsManager.ColorBlindMode.Normal)
         {
             Graphics.Blit(source, destination);
             return;
         }
 
         // Change effect
-        if (mode != previousMode)
+        if (OptionsManager.Instance.mode != previousMode)
         {
             material.SetColor("_R", RGB[(int)mode, 0]);
             material.SetColor("_G", RGB[(int)mode, 1]);
             material.SetColor("_B", RGB[(int)mode, 2]);
-            previousMode = mode;
+            previousMode = OptionsManager.Instance.mode;
         }
 
         // Apply effect

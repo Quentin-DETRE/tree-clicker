@@ -16,6 +16,20 @@ public class OptionsManager : BaseManager
     public float musiqueSliderValue { get; private set;} = 0.6f;
     public float SFXSliderValue { get; private set;} = 0.4f;
 
+    public ColorBlindMode mode = ColorBlindMode.Normal;
+    public enum ColorBlindMode
+    {
+        Normal = 0,
+        Protanopia = 1,
+        Protanomaly = 2,
+        Deuteranopia = 3,
+        Deuteranomaly = 4,
+        Tritanopia = 5,
+        Tritanomaly = 6,
+        Achromatopsia = 7,
+        Achromatomaly = 8,
+    }
+
     void Awake() 
     {
         if (!CheckSingletonInstance(this, ref Instance))
@@ -41,6 +55,8 @@ public class OptionsManager : BaseManager
         audioMixer.SetFloat("Master", Mathf.Log10(masterSliderValue) * 20);
         audioMixer.SetFloat("Musique", Mathf.Log10(musiqueSliderValue) * 20);
         audioMixer.SetFloat("SFX", Mathf.Log10(SFXSliderValue) * 20);
+
+
     }
 
     public void SetVolume(string parameterName, float sliderValue)
@@ -67,5 +83,44 @@ public class OptionsManager : BaseManager
     public void SetFullscreen(bool isFullscreen)
     {
         Screen.fullScreen = isFullscreen;
+    }
+
+    public void ChangeColorblindFilter(int colorblindValue)
+    {
+
+        switch(colorblindValue)
+        {
+            case 0:
+                mode = ColorBlindMode.Normal;
+                break;
+            case 1:
+                mode = ColorBlindMode.Protanopia;
+                break;
+            case 2:
+                mode = ColorBlindMode.Protanomaly;
+                break;
+            case 3:
+                mode = ColorBlindMode.Deuteranopia;
+                break;
+            case 4:
+                mode = ColorBlindMode.Deuteranomaly;
+                break;
+            case 5:
+                mode = ColorBlindMode.Tritanopia;
+                break;
+            case 6:
+                mode = ColorBlindMode.Tritanomaly;
+                break;
+            case 7:
+                mode = ColorBlindMode.Achromatopsia;
+                break;
+            case 8:
+                mode = ColorBlindMode.Achromatomaly;
+                break;
+            default: 
+                mode = ColorBlindMode.Normal;
+                break;
+        }
+        
     }
 }
