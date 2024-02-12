@@ -47,14 +47,7 @@ public class CameraController : MonoBehaviour
                         transform.RotateAround(_target.transform.position, transform.right, Input.GetAxis("Mouse Y") * -_speed);
                 }
             }            
-            else
-            {
-                StartCoroutine(WaitSecond(1f));
-                if (transform.eulerAngles.z > angleMarge && transform.eulerAngles.z < 180)
-                    transform.RotateAround(_target.transform.position, transform.forward, -(_speed / 100));
-                else if (transform.eulerAngles.z > 180 && transform.eulerAngles.z < (360 - angleMarge))
-                    transform.RotateAround(_target.transform.position, transform.forward, (_speed / 100));
-            }
+
             if (Input.GetMouseButton(1))
             {
                 float zoom = _camera.fieldOfView;
@@ -85,10 +78,19 @@ public class CameraController : MonoBehaviour
         /// Active/Désactive la rotation Y
         if (Input.GetKeyUp(KeyCode.Z))
             canRotateY = !canRotateY;
+
+        /// Touche "E" pour activer
+        /// Redresse la planète
+        if (Input.GetKeyUp(KeyCode.E))
+            StartCoroutine(BallancingPlanet(1f));
     }
 
-    private IEnumerator WaitSecond(float sec)
+    private IEnumerator BallancingPlanet(float sec)
     {
         yield return new WaitForSeconds(sec);
+        if (transform.eulerAngles.z > angleMarge && transform.eulerAngles.z < 180)
+            transform.RotateAround(_target.transform.position, transform.forward, -(_speed / 100));
+        else if (transform.eulerAngles.z > 180 && transform.eulerAngles.z < (360 - angleMarge))
+            transform.RotateAround(_target.transform.position, transform.forward, (_speed / 100));
     }
 }
