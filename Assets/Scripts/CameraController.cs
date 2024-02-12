@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    protected Camera camera;
+    protected Camera _camera;
 
-    public GameObject target;
-    protected float speed = 5.0f;
+    public GameObject _target;
+    protected float _speed = 5.0f;
 
     protected Vector3[] camera_transform;
 
-    protected float minZoom = 10f;
-    protected float maxZoom = 100f;
-    protected float sensitivity = 15f;
+    protected float minZoom = 4f;
+    protected float maxZoom = 50f;
+    protected float sensitivity = 10f;
 
     protected float angleMarge = 1f;
 
@@ -26,7 +26,7 @@ public class CameraController : MonoBehaviour
 
     private void Start()
     {
-        camera = Camera.main;
+        _camera = gameObject.GetComponent<Camera>();
         camera_transform = new Vector3[] { transform.position, transform.eulerAngles };
     }
 
@@ -37,30 +37,30 @@ public class CameraController : MonoBehaviour
         {
             if (Input.GetMouseButton(0))
             {
-                _ray = camera.ScreenPointToRay(Input.mousePosition);
+                _ray = _camera.ScreenPointToRay(Input.mousePosition);
                 if (Physics.Raycast(_ray, out _hit, 1000f, earthLayerMask))
                 {
                     Debug.DrawLine(_ray.direction, _hit.point, Color.red, 1f);
                     if (canRotateX)
-                        transform.RotateAround(target.transform.position, transform.up, Input.GetAxis("Mouse X") * speed);
+                        transform.RotateAround(_target.transform.position, transform.up, Input.GetAxis("Mouse X") * _speed);
                     if (canRotateY)
-                        transform.RotateAround(target.transform.position, transform.right, Input.GetAxis("Mouse Y") * -speed);
+                        transform.RotateAround(_target.transform.position, transform.right, Input.GetAxis("Mouse Y") * -_speed);
                 }
             }            
             else
             {
                 StartCoroutine(WaitSecond(1f));
                 if (transform.eulerAngles.z > angleMarge && transform.eulerAngles.z < 180)
-                    transform.RotateAround(target.transform.position, transform.forward, -(speed / 100));
+                    transform.RotateAround(_target.transform.position, transform.forward, -(_speed / 100));
                 else if (transform.eulerAngles.z > 180 && transform.eulerAngles.z < (360 - angleMarge))
-                    transform.RotateAround(target.transform.position, transform.forward, (speed / 100));
+                    transform.RotateAround(_target.transform.position, transform.forward, (_speed / 100));
             }
             if (Input.GetMouseButton(1))
             {
-                float zoom = camera.fieldOfView;
+                float zoom = _camera.fieldOfView;
                 zoom += Input.GetAxis("Mouse ScrollWheel") * -sensitivity;
                 zoom = Mathf.Clamp(zoom, minZoom, maxZoom);
-                camera.fieldOfView = zoom;
+                _camera.fieldOfView = zoom;
             }
         }        
     }
@@ -71,7 +71,7 @@ public class CameraController : MonoBehaviour
         /// Retourne à la position initial
         if (Input.GetKeyUp(KeyCode.Q))
         {
-            camera.fieldOfView = Mathf.Clamp(20f, minZoom, maxZoom);
+            _camera.fieldOfView = Mathf.Clamp(20f, minZoom, maxZoom);
             transform.position = camera_transform[0];
             transform.eulerAngles = camera_transform[1];
         }

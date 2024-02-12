@@ -45,10 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnvironmentPrefab: {fileID: 6415485707854758688, guid: 70ce1576c9737f74caf6371d0d39e143, type: 3}
-  groundLayerMask:
-    serializedVersion: 2
-    m_Bits: 256
-  _mainCamera: {fileID: 0}
-  _parent: {fileID: 0}
-  _minRadius: 90
-  _maxRadius: 100
+  _buildWaypointsList: []
+  _prefabUpgrade:
+  - {fileID: 5308656805365643758, guid: 40e9b0895ee5934409bce8922f321c97, type: 3}
+  - {fileID: 5308656805365643758, guid: e167868c0c7cdc34b8aaaa1e05b56967, type: 3}
+  - {fileID: 5308656805365643758, guid: 0c37b764bc858ce45bfa9f01691527d5, type: 3}

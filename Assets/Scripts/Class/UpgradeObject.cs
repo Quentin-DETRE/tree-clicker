@@ -10,6 +10,7 @@ public class UpgradeArray
 [System.Serializable]
 public class UpgradeObject
 {
+    public int id;
     public string upgradeName;
     public string spriteName;
     [SerializeField]

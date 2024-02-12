@@ -87,17 +87,17 @@ public class WorldManager : BaseManager
         _buildWaypointsList = _parent.GetComponentsInChildren<Transform>();
     }
 
-    public void RandomPlacementButtonClick(GameObject prefab)
+    public void RandomPlacementUpgrade(int idPrefab)
     {
-        SetBuildingPrefab(prefab);
+        SetBuildingPrefab(_prefabUpgrade[idPrefab]);
 
         if (_buildingPrefab != null)
         {
             int random = Random.Range(0, _buildWaypointsList.Length);
             // Instancier l'objet et le placer
-            _toBuild = Instantiate(_buildingPrefab, _buildWaypointsList[random].position, _buildWaypointsList[random].rotation, _parent);
+            _toBuild = Instantiate(_buildingPrefab, _buildWaypointsList[random].position, _buildWaypointsList[random].rotation, _buildWaypointsList[random].transform);
+            _toBuild.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
             _toBuild.SetActive(true);
-
 
             BuildingManager m = _toBuild.GetComponent<BuildingManager>();
             m.SetPlacementMode(PlacementMode.Fixed);

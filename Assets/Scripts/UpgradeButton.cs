@@ -36,6 +36,7 @@ public class UpgradeButton : MonoBehaviour
         costText.text = upgradeData.cost.ToString();
         countText.text = InventoryManager.Instance.GetOwnedUpgradeCount(upgradeData.upgradeName).ToString();
         hintText.text = UIManager.Instance.GetCurrentUpgradeStepDescription(upgradeData);
+        WorldManager.Instance.RandomPlacementUpgrade(upgradeData.id);
     }
 
     public void OnClick()

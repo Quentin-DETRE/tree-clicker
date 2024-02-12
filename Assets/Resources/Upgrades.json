@@ -1,6 +1,7 @@
 {
     "upgrades": [
         {
+            "id": 0,
             "upgradeName": "Arbre",
             "spriteName": "tree",
             "cost": {
@@ -54,6 +55,7 @@
             ]
         },
         {
+            "id": 1,
             "upgradeName": "Volontaire",
             "spriteName": "volunteer",
             "cost": {
@@ -107,6 +109,7 @@
             ]
         },
         {
+            "id": 2,
             "upgradeName": "Paysan",
             "spriteName": "farmer",
             "cost": {
@@ -160,6 +163,7 @@
             ]
         },
         {
+            "id": 3,
             "upgradeName": "Tracteur",
             "spriteName": "tractor",
             "cost": {
@@ -200,6 +204,7 @@
             ]
         },
         {
+            "id": 4,
             "upgradeName": "Ruche d'abeilles",
             "spriteName": "beehive",
             "cost": {
@@ -240,6 +245,7 @@
             ]
         },
         {
+            "id": 5,
             "upgradeName": "Éolienne",
             "spriteName": "windmill",
             "cost": {
@@ -280,6 +286,7 @@
             ]
         },
         {
+            "id": 6,
             "upgradeName": "Équipe de Jardiniers",
             "spriteName": "gardeners",
             "cost": {
