@@ -30,6 +30,8 @@ public class UIManager : BaseManager
     public Slider musiqueSlider;
     public Slider SFXSlider;
 
+    public Dropdown colorblind;
+
     public GameObject plusOne;
 
     private void Awake()
@@ -95,15 +97,18 @@ public class UIManager : BaseManager
             if (uiPrefab == startUIPrefab)
             {
                 currentUI = Instantiate(uiPrefab);
-                masterSlider = currentUI.transform.Find("SettingPanel/OpaqueBackground/MasterVolume").GetComponent<Slider>();
+                masterSlider = currentUI.transform.Find("SettingPanel/OpaqueBackground/BaseSettings/MasterVolume").GetComponent<Slider>();
                 masterSlider.value = OptionsManager.Instance.masterSliderValue;
-                musiqueSlider = currentUI.transform.Find("SettingPanel/OpaqueBackground/MusicVolume").GetComponent<Slider>();
+                musiqueSlider = currentUI.transform.Find("SettingPanel/OpaqueBackground/BaseSettings/MusicVolume").GetComponent<Slider>();
                 musiqueSlider.value = OptionsManager.Instance.musiqueSliderValue;
-                SFXSlider = currentUI.transform.Find("SettingPanel/OpaqueBackground/SFXVolume").GetComponent<Slider>();
+                SFXSlider = currentUI.transform.Find("SettingPanel/OpaqueBackground/BaseSettings/SFXVolume").GetComponent<Slider>();
                 SFXSlider.value = OptionsManager.Instance.SFXSliderValue;
                 masterSlider.onValueChanged.AddListener(HandleMasterVolumeChanged);
                 musiqueSlider.onValueChanged.AddListener(HandleMusicVolumeChanged);
                 SFXSlider.onValueChanged.AddListener(HandleSFXVolumeChanged);
+
+                colorblind = currentUI.transform.Find("SettingPanel/OpaqueBackground/Colorblind/ColorblindDropdown").GetComponent<Dropdown>();
+                colorblind.onValueChanged.AddListener(HandleColorblindChanged);
             }
             else if (uiPrefab == gameUIPrefab)
             {
@@ -117,11 +122,11 @@ public class UIManager : BaseManager
             else if (uiPrefab == pauseUIPrefab)
             {
                 pauseUI = Instantiate(uiPrefab);
-                masterSlider = pauseUI.transform.Find("OpaqueBackground/MasterVolume").GetComponent<Slider>();
+                masterSlider = pauseUI.transform.Find("OpaqueBackground/BaseSettings/MasterVolume").GetComponent<Slider>();
                 masterSlider.value = OptionsManager.Instance.masterSliderValue;
-                musiqueSlider = pauseUI.transform.Find("OpaqueBackground/MusicVolume").GetComponent<Slider>();
+                musiqueSlider = pauseUI.transform.Find("OpaqueBackground/BaseSettings/MusicVolume").GetComponent<Slider>();
                 musiqueSlider.value = OptionsManager.Instance.musiqueSliderValue;
-                SFXSlider = pauseUI.transform.Find("OpaqueBackground/SFXVolume").GetComponent<Slider>();
+                SFXSlider = pauseUI.transform.Find("OpaqueBackground/BaseSettings/SFXVolume").GetComponent<Slider>();
                 SFXSlider.value = OptionsManager.Instance.SFXSliderValue;
                 masterSlider.onValueChanged.AddListener(HandleMasterVolumeChanged);
                 musiqueSlider.onValueChanged.AddListener(HandleMusicVolumeChanged);
@@ -240,6 +245,11 @@ public class UIManager : BaseManager
     {
         OptionsManager.Instance.SetVolume("SFX", value);
     } 
+
+    private void HandleColorblindChanged(int value)
+    {
+        OptionsManager.Instance.ChangeColorblindFilter(value);
+    }
 
     // 👉 - UI Interaction
 
