@@ -9,6 +9,9 @@ TagManager:
   - Earth
   - Waypoint
   - Build
+  - Center
+  - Object
+  - Fire
   layers:
   - Default
   - TransparentFX
