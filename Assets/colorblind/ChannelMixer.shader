@@ -1,6 +1,4 @@
-﻿// Alan Zucconi
-// www.alanzucconi.com
-Shader "Hidden/ChannelMixer"
+﻿Shader "Hidden/ChannelMixer"
 {
 	Properties
 	{
@@ -74,9 +72,6 @@ Shader "Hidden/ChannelMixer"
 				fixed lum = c.r*.3 + c.g*.59 + c.b*.11;
 				fixed3 bw = fixed3(lum, lum, lum);
 
-				//return fixed4(lerp(bw, fixed3(1, 0, 0), diff), c.a);
-				//return fixed4(lerp(bw, fixed3(1, 0, 0), (diff.r+diff.g+diff.b)/3), c.a);
-				//return fixed4(lerp(c, bw, saturate(	(diff.r + diff.g + diff.b)/1	)), c.a);
 				return fixed4(lerp(bw, fixed3(1, 0, 0), saturate((diff.r + diff.g + diff.b) / 3)), c.a);
 			}
 			ENDCG

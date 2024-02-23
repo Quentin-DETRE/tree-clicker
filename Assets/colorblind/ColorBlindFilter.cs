@@ -1,10 +1,6 @@
-﻿// Alan Zucconi
-// www.alanzucconi.com
-using UnityEngine;
+﻿using UnityEngine;
 
-
-
-[ExecuteInEditMode]
+[ExecuteAlways]
 public class ColorBlindFilter : MonoBehaviour
 {
 
