@@ -30,13 +30,13 @@ public class MeteorMovement : MonoBehaviour
     public IEnumerator WaitEvent()
     {
         isActive = false;
+        particleSystem.Stop();
         gameObject.GetComponent<MeshRenderer>().enabled = false;
         transform.position = meteor_transform[0];
         transform.eulerAngles = meteor_transform[1];
-        particleSystem.Stop();
-        yield return new WaitForSeconds(180f);
+        yield return new WaitForSeconds(Random.Range(60,180));
         gameObject.GetComponent<MeshRenderer>().enabled = true;
-        particleSystem.Play();
         isActive = true;
+        particleSystem.Play();
     }
 }
